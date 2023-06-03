@@ -7,4 +7,8 @@ export default function footerSection() {
     addFlashCard = functionStack.addFlashCard;
     disableAllExcept = functionStack.disableAllExcept;
   }
+
+  return {
+    setCallBacks,
+  }
 }

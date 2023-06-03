@@ -14,7 +14,7 @@ function UI() {
     functionStack = getContentCallbacks();
     content.setCallBacks(functionStack);
     functionStack = getFooterCallBacks();
-    content.setCallBacks(functionStack);
+    footer.setCallBacks(functionStack);
   }
 
   function getHeaderCallbacks() {
