@@ -3,8 +3,6 @@ import buttonOpenDeck from "./buttonOpenDeck";
 import buttonRemoveDeck from "./buttonRemoveDeck";
 
 export default function headerSection() {
-  buttonAddDeck.init(addDeck);
-  buttonRemoveDeck.init(removeDeck);
   let loadFlashCards;
   let disableAllExcept;
 
@@ -13,17 +11,21 @@ export default function headerSection() {
     disableAllExcept = functionStack.disableAllExcept;
   }
 
+  function render() {
+    buttonAddDeck.init(addDeck);
+    buttonRemoveDeck.init(removeDeck);
+  }
+
   function addDeck() {
-    const name = generateName();
+    const name = generateName('NewDeck');
     const header = document.querySelector('body');
     const button = buttonOpenDeck(name, loadFlashCards);
     header.appendChild(button);
   }
 
-  function generateName() {
+  function generateName(name) {
     const nameList = getNameList();
-    const defaultName = 'New Deck';
-    let name = defaultName
+    const defaultName = name;
     for (let i = 1; nameList.includes(name); i++) {
       name = defaultName + i;
     }
@@ -43,12 +45,17 @@ export default function headerSection() {
     console.log("removed deck");
   }
 
-  function callbackFunction() {
-    console.log('hello');
-  }
-
-  function editDeckName() {
-    console.log('editing deck name');
+  function changeDeckName(deckNameOld, deckName) {
+    if (deckName !== deckNameOld) {
+      deckName = generateName(deckName);
+      const oldId = '#buttonDeck_' + deckNameOld;
+      const newId = 'buttonDeck_' + deckName;
+      const button = document.querySelector(oldId);
+      button.removeAttribute('id');
+      button.setAttribute('id', newId);
+      button.textContent = deckName;
+    }
+    return deckName;
   }
 
   function disableAll() {
@@ -57,7 +64,8 @@ export default function headerSection() {
 
   return {
     setCallBacks,
-    editDeckName,
-    disableAll
+    render,
+    changeDeckName,
+    disableAll,
   }
 };

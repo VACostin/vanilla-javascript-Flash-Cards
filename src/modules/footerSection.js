@@ -8,7 +8,12 @@ export default function footerSection() {
     disableAllExcept = functionStack.disableAllExcept;
   }
 
+  function render() {
+
+  }
+
   return {
     setCallBacks,
+    render,
   }
 }

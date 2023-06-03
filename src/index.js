@@ -1,6 +1,7 @@
 import headerSection from './modules/headerSection';
 import contentSection from './modules/contentSection';
 import footerSection from './modules/footerSection';
+import './style.css';
 
 function UI() {
 
@@ -9,12 +10,23 @@ function UI() {
   const footer = footerSection();
 
   function init() {
+    setCallBacks();
+    render();
+  }
+
+  function setCallBacks() {
     let functionStack = getHeaderCallbacks();
     header.setCallBacks(functionStack);
     functionStack = getContentCallbacks();
     content.setCallBacks(functionStack);
     functionStack = getFooterCallBacks();
     footer.setCallBacks(functionStack);
+  }
+
+  function render() {
+    header.render();
+    content.render();
+    footer.render();
   }
 
   function getHeaderCallbacks() {
@@ -26,7 +38,7 @@ function UI() {
 
   function getContentCallbacks() {
     const functionStack = new Object();
-    functionStack.editDeckName = header.editDeckName;
+    functionStack.changeDeckName = header.changeDeckName;
     functionStack.disableAllExcept = disableAllExcept;
     return functionStack;
   }

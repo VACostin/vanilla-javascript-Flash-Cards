@@ -1,14 +1,16 @@
-import buttonEditCard from "./buttonEditCard";
-import buttonRemoveCard from "./buttonRemoveCard";
+import editDeckNameSection from "./editDeckNameSection";
 
 export default function contentSection() {
-
-  let editDeckName;
   let disableAllExcept;
+  const deckNameField = editDeckNameSection();
+
+  function render() {
+    deckNameField.render();
+  }
 
   function setCallBacks(functionStack) {
-    let editDeckName = functionStack.editDeckName;
-    let disableAllExcept = functionStack.disableAllExcept;
+    disableAllExcept = functionStack.disableAllExcept;
+    deckNameField.setCallBacks(functionStack);
   }
 
   function loadFlashCards(deckName) {
@@ -20,8 +22,9 @@ export default function contentSection() {
   }
 
   return {
+    render,
     setCallBacks,
     loadFlashCards,
-    addFlashCard
+    addFlashCard,
   }
 }
