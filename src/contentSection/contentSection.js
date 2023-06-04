@@ -1,11 +1,15 @@
-import editDeckNameSection from "./editDeckNameSection";
+import editDeckNameSection from "./editDeckNameSection/editDeckNameSection.js";
+import cardsSection from "./cardsSection/cardsSection.js";
 
 export default function contentSection() {
   let disableAllExcept;
+  const content = document.querySelector('#content');
   const deckNameField = editDeckNameSection();
+  const cards = cardsSection();
 
   function render() {
     deckNameField.render();
+    cards.render();
   }
 
   function setCallBacks(functionStack) {
@@ -14,17 +18,20 @@ export default function contentSection() {
   }
 
   function loadFlashCards(deckName) {
-    console.log('loadingFlashCards for ' + deckName);
+    cards.reset();
+    deckNameField.show(deckName);
+    cards.load(deckName);    
   }
 
   function addFlashCard() {
-    console.log('addingFlashCard');
+    const deckName = deckNameField.getDeckName();
+    cards.addCard(deckName);
   }
 
   return {
     render,
-    setCallBacks,
     loadFlashCards,
+    setCallBacks,
     addFlashCard,
   }
 }

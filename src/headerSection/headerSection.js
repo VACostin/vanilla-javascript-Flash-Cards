@@ -1,6 +1,6 @@
-import buttonAddDeck from "./buttonAddDeck";
-import buttonOpenDeck from "./buttonOpenDeck";
-import buttonRemoveDeck from "./buttonRemoveDeck";
+import buttonAddDeck from "./buttonAddDeck/buttonAddDeck.js";
+import buttonOpenDeck from "./buttonOpenDeck/buttonOpenDeck.js";
+import buttonRemoveDeck from "./buttonRemoveDeck/buttonRemoveDeck.js";
 
 export default function headerSection() {
   let loadFlashCards;
@@ -14,11 +14,13 @@ export default function headerSection() {
   function render() {
     buttonAddDeck.init(addDeck);
     buttonRemoveDeck.init(removeDeck);
+    //foreach deckname
+    //button = buttonOpendeck(name, loadFlashcards)
   }
 
   function addDeck() {
     const name = generateName('NewDeck');
-    const header = document.querySelector('body');
+    const header = document.querySelector('#header');
     const button = buttonOpenDeck(name, loadFlashCards);
     header.appendChild(button);
   }

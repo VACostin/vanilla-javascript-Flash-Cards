@@ -1,6 +1,6 @@
-import buttonCancelEditDeckName from "./buttonCancelEditDeckName";
-import buttonDoneEditDeckName from "./buttonDoneEditDeckName";
-import fieldDeckName from "./fieldDeckName";
+import buttonCancelEditDeckName from "./buttonCancelEditDeckName/buttonCancelEditDeckName";
+import buttonDoneEditDeckName from "./buttonDoneEditDeckName/buttonDoneEditDeckName";
+import fieldDeckName from "./fieldDeckName/fieldDeckName";
 
 export default function editDeckNameSection() {
 
@@ -13,6 +13,11 @@ export default function editDeckNameSection() {
     buttonDoneEditDeckName.init(doneEditDeckName)
     buttonCancelEditDeckName.init(cancelEditDeckName);
     fieldDeckName.init(editDeckName);
+  }
+
+  function show(deckName) {
+    fieldDeckName.show(fieldEditDeckName)
+    fieldDeckName.setDeckName(deckName);
   }
 
   function setCallBacks(functionStack) {
@@ -54,8 +59,14 @@ export default function editDeckNameSection() {
     buttonCancelEditDeckName.hide();
   }
 
+  function getDeckName() {
+    return fieldDeckName.getDeckName();
+  }
+
   return {
     render,
+    show,
+    getDeckName,
     setCallBacks,
   }
 }

@@ -1,15 +1,15 @@
+import buttonAddFlashCard from "./buttonAddFlashCard/buttonAddFlashCard.js";
+
 export default function footerSection() {
 
   let addFlashCard;
-  let disableAllExcept;
 
   function setCallBacks(functionStack) {
     addFlashCard = functionStack.addFlashCard;
-    disableAllExcept = functionStack.disableAllExcept;
   }
 
   function render() {
-
+    buttonAddFlashCard.init(addFlashCard)
   }
 
   return {

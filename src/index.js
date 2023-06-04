@@ -1,6 +1,6 @@
-import headerSection from './modules/headerSection';
-import contentSection from './modules/contentSection';
-import footerSection from './modules/footerSection';
+import headerSection from './headerSection/headerSection';
+import contentSection from './contentSection/contentSection';
+import footerSection from './footerSection/footerSection';
 import './style.css';
 
 function UI() {
