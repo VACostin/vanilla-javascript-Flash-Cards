@@ -3,38 +3,51 @@ import buttonRemoveCard from "./buttonRemoveCard/buttonRemoveCard.js";
 import fieldEditCardName from "./fieldEditCardName/fieldEditCardName.js";
 
 export default function fieldCard(name) {
-
-  const card = document.createElement('div');
-  card.classList.add('card');
-  let cardName = name;
-  let cardID = 'card_' + name;
-  card.setAttribute('id', cardID)
-
-  const field = fieldCardName(cardName, onFinishEditTitle, editTitle);
-  const buttonEdit = buttonEditCard(editTitle);
+  const cardName = name;
+  const card = document.createElement("div");
+  const handleFieldEditCardName = fieldEditCardName(cardName, updateCard);
+  const field = handleFieldEditCardName.field;
+  const buttonEdit = buttonEditCard(editCard);
   const buttonRemove = buttonRemoveCard(removeCard);
+
+  card.classList.add("card");
 
   card.appendChild(field);
   card.appendChild(buttonEdit);
   card.appendChild(buttonRemove);
 
-  function editTitle() {
-    field.contentEditable = true;
-    buttonEdit.remove();
-    buttonRemove.remove();
-    field.focus();
+  function editCard() {
+    hideCardButtons();
+    handleFieldEditCardName.editON();
   }
 
-  function onFinishEditTitle() {
+  function updateCard(name) {
+    showCardButtons();
+    //do db here or one level up
+    return name;
+  }
+
+  function showCardButtons() {
     //db insert
-    field.contentEditable = false;
     card.appendChild(buttonEdit);
     card.appendChild(buttonRemove);
   }
 
-  function removeCard() {
-    card.remove();
+  function hideCardButtons() {
+    buttonEdit.remove();
+    buttonRemove.remove();
   }
 
-  return card;
+  //wrapper neeeded so our slideshow effect works
+  //please put this on a different module, it looks ugly
+  const cardWrapper = document.createElement("div");
+  cardWrapper.classList.add('cardWrapper');
+  cardWrapper.appendChild(card);
+
+  function removeCard() {
+    //do db here or one level up
+    cardWrapper.remove();
+  }
+
+  return cardWrapper;
 }

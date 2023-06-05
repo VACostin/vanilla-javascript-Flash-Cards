@@ -1,13 +1,5 @@
-const buttonRemoveDeck = (() => {
-  const button = document.querySelector('#buttonRemoveDeck');
-
-  const init = (callbackFunction) => {
-    button.addEventListener('click', () => callbackFunction());
-  };
-
-  return {
-    init,
-  };
-})();
-
-export default buttonRemoveDeck;
+export default function buttonRemoveDeck(removeDeck) {
+  const button = document.querySelector("#buttonRemoveDeck");
+  button.addEventListener("click", () => removeDeck());
+  return button;
+}

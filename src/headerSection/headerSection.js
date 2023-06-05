@@ -3,26 +3,30 @@ import buttonOpenDeck from "./buttonOpenDeck/buttonOpenDeck.js";
 import buttonRemoveDeck from "./buttonRemoveDeck/buttonRemoveDeck.js";
 
 export default function headerSection() {
-  let loadFlashCards;
-  let disableAllExcept;
+  const bigFunctionStack = new Object();
+  const deckList = document.querySelector("#deckList");
+  const buttonAdd = buttonAddDeck(addDeck);
+  const buttonRemove = buttonRemoveDeck(removeDeck);
 
   function setCallBacks(functionStack) {
-    loadFlashCards = functionStack.loadFlashCards;
-    disableAllExcept = functionStack.disableAllExcept;
-  }
-
-  function render() {
-    buttonAddDeck.init(addDeck);
-    buttonRemoveDeck.init(removeDeck);
-    //foreach deckname
-    //button = buttonOpendeck(name, loadFlashcards)
+    bigFunctionStack.loadFlashCards = functionStack.loadFlashCards;
+    bigFunctionStack.disableAllExcept = functionStack.disableAllExcept;
+    bigFunctionStack.footer = functionStack.footer;
   }
 
   function addDeck() {
-    const name = generateName('NewDeck');
-    const header = document.querySelector('#header');
-    const button = buttonOpenDeck(name, loadFlashCards);
-    header.appendChild(button);
+    const loadFlashCards = bigFunctionStack.loadFlashCards;
+    const showFooter = bigFunctionStack.footer.show;
+    const functionStack = {
+      loadFlashCards,
+      showFooter,
+    };
+    const defaultName = "NewDeck";
+    const deckName = generateName(defaultName);
+    //db query
+    const header = document.querySelector("#header");
+    const button = buttonOpenDeck(deckName, functionStack);
+    deckList.appendChild(button);
   }
 
   function generateName(name) {
@@ -36,8 +40,9 @@ export default function headerSection() {
 
   function getNameList() {
     const nameList = [];
-    const buttons = document.querySelectorAll('.buttonDeck');
-    buttons.forEach(button => {
+    //db query instead
+    const buttons = document.querySelectorAll(".buttonDeck");
+    buttons.forEach((button) => {
       nameList.push(button.textContent);
     });
     return nameList;
@@ -50,24 +55,24 @@ export default function headerSection() {
   function changeDeckName(deckNameOld, deckName) {
     if (deckName !== deckNameOld) {
       deckName = generateName(deckName);
-      const oldId = '#buttonDeck_' + deckNameOld;
-      const newId = 'buttonDeck_' + deckName;
+      const oldId = "#buttonDeck_" + deckNameOld;
+      const newId = "buttonDeck_" + deckName;
       const button = document.querySelector(oldId);
-      button.removeAttribute('id');
-      button.setAttribute('id', newId);
+      button.removeAttribute("id");
+      //db query
+      button.setAttribute("id", newId);
       button.textContent = deckName;
     }
     return deckName;
   }
 
   function disableAll() {
-    console.log('disabling header');
+    console.log("disabling header");
   }
 
   return {
     setCallBacks,
-    render,
     changeDeckName,
     disableAll,
-  }
-};
+  };
+}

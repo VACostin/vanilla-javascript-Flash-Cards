@@ -1,35 +1,47 @@
-const fieldDeckName = (() => {
-  const field = document.createElement('p');
-  field.setAttribute('id', 'fieldDeckName');
+export default function fieldDeckName(callbackFunction, callbackFunction2) {
+  let deckName = "";
+  let editFlag = false;
+  const field = document.createElement("p");
 
-  const init = (callbackFunction) => {
-    field.addEventListener('click', () => callbackFunction());
-  };
-
-  const show = (parent) => {
-    field.contentEditable = true;
-    parent.appendChild(field);
-  }
-
-  const hide = () => {
-    field.remove();
-  }
-
-  const getDeckName = () => {
+  function getInput() {
     return field.textContent;
   }
 
-  const setDeckName = (deckName) => {
+  function resetInput() {
     field.textContent = deckName;
   }
 
+  function getDeckName() {
+    return deckName;
+  }
+
+  function setDeckName(name) {
+    deckName = name;
+    field.textContent = name;
+  }
+
+  function setFlag(boolean) {
+    editFlag = boolean;
+    field.contentEditable = editFlag;
+    if (editFlag) field.focus();
+    else field.blur();
+  }
+
+  function getFlag() {
+    return editFlag;
+  }
+
+  field.setAttribute("id", "fieldDeckName");
+  field.addEventListener("click", () => callbackFunction());
+  field.addEventListener("blur", () => callbackFunction2());
+  
   return {
-    init,
-    show,
-    hide,
+    field,
+    setFlag,
+    getFlag,
+    getInput,
+    resetInput,
     getDeckName,
     setDeckName,
   };
-})();
-
-export default fieldDeckName;
+}

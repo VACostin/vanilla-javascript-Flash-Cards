@@ -1,19 +1,25 @@
 import buttonAddFlashCard from "./buttonAddFlashCard/buttonAddFlashCard.js";
 
-export default function footerSection() {
+export default function footerSection(functionStack) {
+  const addFlashCard = functionStack.addFlashCard;
+  const footer = document.querySelector("#footer");
+  const buttonAdd = buttonAddFlashCard(addFlashCard);
 
-  let addFlashCard;
-
-  function setCallBacks(functionStack) {
-    addFlashCard = functionStack.addFlashCard;
+  function show() {
+    footer.appendChild(buttonAdd);
   }
 
-  function render() {
-    buttonAddFlashCard.init(addFlashCard)
+  function hide() {
+    buttonAdd.remove();
+  }
+
+  function disable() {
+    console.log("disabled footer");
   }
 
   return {
-    setCallBacks,
-    render,
-  }
+    show,
+    hide,
+    disable,
+  };
 }

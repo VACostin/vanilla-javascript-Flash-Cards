@@ -1,25 +1,8 @@
-const buttonCancelEditDeckName = (() => {
-  const button = document.createElement('button');
-  button.setAttribute('id', 'buttonCancelEditDeckName');
-  button.textContent = 'Cancel';
-  const init = (callbackFunction) => {
-    button.addEventListener('click', () => callbackFunction());
-  };
+export default function buttonCancelEditDeckName(callbackFunction) {
+  const button = document.createElement("button");
+  button.setAttribute("id", "buttonCancelEditDeckName");
+  button.textContent = "Cancel";
+  button.addEventListener("mousedown", () => callbackFunction());
 
-  const show = (fieldEditDeckName) => {
-    fieldEditDeckName.appendChild(button);
-  }
-
-  const hide = () => {
-    button.remove();
-  }
-  
-
-  return {
-    init,
-    show,
-    hide
-  };
-})();
-
-export default buttonCancelEditDeckName;
+  return button;
+}

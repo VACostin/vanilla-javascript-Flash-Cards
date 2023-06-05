@@ -1,37 +1,28 @@
 import editDeckNameSection from "./editDeckNameSection/editDeckNameSection.js";
 import cardsSection from "./cardsSection/cardsSection.js";
 
-export default function contentSection() {
-  let disableAllExcept;
-  const content = document.querySelector('#content');
-  const deckNameField = editDeckNameSection();
-  const cards = cardsSection();
-
-  function render() {
-    deckNameField.render();
-    cards.render();
-  }
-
-  function setCallBacks(functionStack) {
-    disableAllExcept = functionStack.disableAllExcept;
-    deckNameField.setCallBacks(functionStack);
-  }
+export default function contentSection(functionStack) {
+  const content = document.querySelector("#content");
+  const deckNameField = editDeckNameSection(functionStack);
+  const getDeckName = deckNameField.getDeckName;
+  const cardsField = cardsSection(getDeckName);
 
   function loadFlashCards(deckName) {
-    cards.reset();
+    cardsField.reset();
     deckNameField.show(deckName);
-    cards.load(deckName);    
+    cardsField.load(deckName);
   }
 
   function addFlashCard() {
-    const deckName = deckNameField.getDeckName();
-    cards.addCard(deckName);
+    cardsField.addCard();
+  }
+
+  function disable() {
+    console.log("content section disabled");
   }
 
   return {
-    render,
     loadFlashCards,
-    setCallBacks,
     addFlashCard,
-  }
+  };
 }

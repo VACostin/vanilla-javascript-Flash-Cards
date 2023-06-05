@@ -2,71 +2,67 @@ import buttonCancelEditDeckName from "./buttonCancelEditDeckName/buttonCancelEdi
 import buttonDoneEditDeckName from "./buttonDoneEditDeckName/buttonDoneEditDeckName";
 import fieldDeckName from "./fieldDeckName/fieldDeckName";
 
-export default function editDeckNameSection() {
-
-  const fieldEditDeckName = document.querySelector('#fieldEditDeckName');
-  let currentDeckName = '';
-  let changeDeckName
-  let editingFlag = false;
-
-  function render() {
-    buttonDoneEditDeckName.init(doneEditDeckName)
-    buttonCancelEditDeckName.init(cancelEditDeckName);
-    fieldDeckName.init(editDeckName);
-  }
+export default function editDeckNameSection(functionStack) {
+  const changeDeckName = functionStack.changeDeckName;
+  const fieldEditDeckName = document.querySelector("#fieldEditDeckName");
+  const buttonDone = buttonDoneEditDeckName(doneEditDeckName);
+  const buttonCancel = buttonCancelEditDeckName(cancelEditDeckName);
+  const deckNameField = fieldDeckName(editDeckName, doneEditDeckName);
 
   function show(deckName) {
-    fieldDeckName.show(fieldEditDeckName)
-    fieldDeckName.setDeckName(deckName);
+    deckNameField.setDeckName(deckName);
+    fieldEditDeckName.appendChild(deckNameField.field);
   }
 
-  function setCallBacks(functionStack) {
-    changeDeckName = functionStack.changeDeckName;
+  function reset() {
+    fieldEditDeckName.removeChild(deckNameField.field);
+    hideButtons();
   }
 
   function doneEditDeckName() {
-    if (2 > 1) //isvalid
-    {
-      editingFlag = false;
-      let deckName = fieldDeckName.getDeckName();
-      deckName = changeDeckName(currentDeckName, deckName);
-      fieldDeckName.setDeckName(deckName);
+    const editFlag = deckNameField.getFlag();
+    if (editFlag) {
+      //&&isvalidinput
+      deckNameField.setFlag(false);
+      const oldDeckName = deckNameField.getDeckName();
+      const newDeckName = deckNameField.getInput();
+      const deckName = changeDeckName(oldDeckName, newDeckName);
+      deckNameField.setDeckName(deckName);
       hideButtons();
     }
   }
 
   function cancelEditDeckName() {
-    editingFlag = false;
-    fieldDeckName.setDeckName(currentDeckName);
+    deckNameField.setFlag(false);
+    deckNameField.resetInput();
     hideButtons();
   }
 
   function editDeckName() {
-    if (!editingFlag) {
-      currentDeckName = fieldDeckName.getDeckName();
+    const editFlag = deckNameField.getFlag();
+    if (!editFlag) {
       showButtons();
+      deckNameField.setFlag(true);
     }
-    editingFlag = true;
   }
 
   function showButtons() {
-    buttonDoneEditDeckName.show(fieldEditDeckName);
-    buttonCancelEditDeckName.show(fieldEditDeckName);
+    fieldEditDeckName.appendChild(buttonDone);
+    fieldEditDeckName.appendChild(buttonCancel);
   }
 
   function hideButtons() {
-    buttonDoneEditDeckName.hide();
-    buttonCancelEditDeckName.hide();
+    buttonDone.remove();
+    buttonCancel.remove();
   }
 
   function getDeckName() {
-    return fieldDeckName.getDeckName();
+    return deckNameField.getDeckName();
   }
 
   return {
-    render,
     show,
+    reset,
     getDeckName,
-    setCallBacks,
-  }
+  };
 }

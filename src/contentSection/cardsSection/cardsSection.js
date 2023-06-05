@@ -1,29 +1,30 @@
 import fieldCard from "./fieldCard/fieldCard.js";
 
-export default function cardsSection() {
+export default function cardsSection(getDeckNameHandle) {
+  const fieldCards = document.querySelector("#fieldCards");
+  const getDeckName = getDeckNameHandle;
 
-  const fieldCards = document.querySelector('#fieldCards');
-
-  function render() {
-    console.log('we aint doing shit here');
-  }
-
-  function load(deckName) {
-    const cards = getCards(deckName)
+  function load() {
+    const deckName = getDeckName();
+    const cards = getCards(deckName);
     //foreach card
     //fieldCards.append(card)
   }
 
-  function getCards(deckName) {
-    console.log('getting cards for: ' + deckName);
+  function getCards() {
+    const deckName = getDeckName();
+    //db query
+    console.log("getting cards for: " + deckName);
+    //return cards
   }
 
-  function addCard(deckName) {
+  function addCard() {
+    const deckName = getDeckName();
+    const defaultCardName = "NewCard";
+    let cardName = defaultCardName;
     //db query
-    const defaultName = 'NewCard';
-    const card = fieldCard(defaultName);
+    const card = fieldCard(cardName);
     fieldCards.append(card);
-    console.log(card);
   }
 
   function reset() {
@@ -32,12 +33,9 @@ export default function cardsSection() {
     }
   }
 
-
-
   return {
-    render,
     load,
     addCard,
     reset,
-  }
+  };
 }

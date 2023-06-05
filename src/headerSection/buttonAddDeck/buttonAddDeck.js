@@ -1,13 +1,5 @@
-const buttonAddDeck = (() => {
-  const button = document.querySelector('#buttonAddDeck');
-
-  const init = (callbackFunction) => {
-    button.addEventListener('click', () => callbackFunction());
-  };
-
-  return {
-    init,
-  };
-})();
-
-export default buttonAddDeck;
+export default function buttonAddDeck(addDeck) {
+  const button = document.querySelector("#buttonAddDeck");
+  button.addEventListener("click", () => addDeck());
+  return button;
+}

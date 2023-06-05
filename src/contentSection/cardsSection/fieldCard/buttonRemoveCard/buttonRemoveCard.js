@@ -1,9 +1,9 @@
-export default function buttonRemoveCard(callbackFunction) {
-  const button = document.createElement('button');
+export default function buttonRemoveCard(removeCard) {
+  const button = document.createElement("button");
 
-  button.classList.add('buttonRemove');
-  button.textContent = 'X';
-  button.addEventListener('click', () => callbackFunction());
+  button.classList.add("buttonRemoveCard");
+  button.textContent = "X";
+  button.addEventListener("click", () => removeCard());
 
   return button;
 }
