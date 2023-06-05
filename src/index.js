@@ -2,7 +2,7 @@ import headerSection from "./headerSection/headerSection";
 import contentSection from "./contentSection/contentSection";
 import footerSection from "./footerSection/footerSection";
 import "./style.css";
-import "./reset.css"
+import "./reset.css";
 
 function initUI() {
   const header = headerSection();

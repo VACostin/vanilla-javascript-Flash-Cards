@@ -47,13 +47,13 @@ export default function editDeckNameSection(functionStack) {
   }
 
   function showButtons() {
-    fieldEditDeckName.appendChild(buttonDone);
-    fieldEditDeckName.appendChild(buttonCancel);
+    //fieldEditDeckName.appendChild(buttonDone);
+    //fieldEditDeckName.appendChild(buttonCancel);
   }
 
   function hideButtons() {
-    buttonDone.remove();
-    buttonCancel.remove();
+    //buttonDone.remove();
+    //buttonCancel.remove();
   }
 
   function getDeckName() {

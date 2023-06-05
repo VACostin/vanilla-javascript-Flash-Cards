@@ -1,4 +1,4 @@
-import fieldCard from "./fieldCard/fieldCard.js";
+import cardWrapper from "./cardWrapper/cardWrapper.js";
 
 export default function cardsSection(getDeckNameHandle) {
   const fieldCards = document.querySelector("#fieldCards");
@@ -23,8 +23,8 @@ export default function cardsSection(getDeckNameHandle) {
     const defaultCardName = "NewCard";
     let cardName = defaultCardName;
     //db query
-    const card = fieldCard(cardName);
-    fieldCards.append(card);
+    const cardWrap = cardWrapper(cardName, "description");
+    fieldCards.insertBefore(cardWrap, fieldCards.firstChild);
   }
 
   function reset() {

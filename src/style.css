@@ -1,9 +1,16 @@
-* {
-  overflow: hidden;
+*:not(#content *) {
+  overflow:hidden;
+}
+
+html {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 body {
-  width: 100vw;
+  margin: 0 auto;
+  flex-basis: 60vh;
   height: 100vh;
 }
 
@@ -11,26 +18,45 @@ body {
   width: 100%;
   height: 15%;
   display: flex;
-  border: 2px solid red;
+  border-bottom: 2px solid black;
 }
 
 #addDeck,
 #removeDeck {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   vertical-align: center;
-  width: 18%;
+  width: 23%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+#addDeck {
+  padding-right: 2%;
+  padding-left: 2%;
+  border-right: 2px solid black;
+}
+
+#removeDeck {
+  padding-right: 2%;
+  padding-left: 2%;
+  border-left: 2px solid black;
+}
+
+#header button {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 80%;
+  font-size: 0.7em;
 }
 
 #deckList {
-  width: 60%;
-  margin-left: 2%;
-  margin-right: 2%;
+  width: 46%;
   scroll-snap-type: x mandatory;
   overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
-  display: flex;
   align-items: center;
   gap: 7%;
 }
@@ -43,14 +69,12 @@ body {
 
 .deck {
   flex-shrink: 0;
-  width: 20%;
+  width: 50%;
   height: 80%;
-  border: 2px solid red;
 }
 
 #content {
   height: 70%;
-  border: 2px solid green;
 }
 
 #fieldEditDeckName {
@@ -58,7 +82,6 @@ body {
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-  border: 2px solid red;
   position: relative;
   display: flex;
   align-items: center;
@@ -67,6 +90,7 @@ body {
 
 #fieldEditDeckName > p {
   text-align: center;
+  text-decoration: underline;
 }
 
 #buttonDoneEditDeckName {
@@ -98,24 +122,55 @@ body {
   height: 0;
 }
 
-.cardWrapper {
-  border: 2px solid black;
+.cardWrap {
   scroll-snap-align: start;
   min-width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  perspective: 1000px;
+}
+
+.cardWrapInner {
+  position: relative;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card {
-  border: 2px solid black;
-  width: 80%;
-  height: 80%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+}
+
+.card {
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
+}
+
+.fieldEditCardText {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.buttonEditCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.buttonRemoveCard {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .buttonEditCard {
@@ -132,7 +187,7 @@ body {
 
 #footer {
   height: 15%;
-  border: 2px solid red;
+  border-top: 2px solid black;
   display: flex;
   justify-content: center;
   align-items: center;

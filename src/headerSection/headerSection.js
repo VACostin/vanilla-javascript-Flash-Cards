@@ -41,7 +41,7 @@ export default function headerSection() {
   function getNameList() {
     const nameList = [];
     //db query instead
-    const buttons = document.querySelectorAll(".buttonDeck");
+    const buttons = document.querySelectorAll(".deck");
     buttons.forEach((button) => {
       nameList.push(button.textContent);
     });

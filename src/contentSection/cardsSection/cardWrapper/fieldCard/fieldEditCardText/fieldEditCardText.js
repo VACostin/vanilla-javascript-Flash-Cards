@@ -2,20 +2,21 @@ import buttonDoneEditCardName from "./buttonDoneEditCardName/buttonDoneEditCardN
 import buttonCancelEditCardName from "./buttonCancelEditCardName/buttonCancelEditCardName.js";
 import fieldCardName from "./fieldCardName/fieldCardName.js";
 
-export default function fieldEditCardName(name, updateDeckEntry) {
+export default function fieldEditCardText(name, updateDeckEntry) {
   //let cardName = name;
 
   const field = document.createElement("div");
   const fieldName = fieldCardName(name, onFinishEditCard);
   //const buttonDone = buttonDoneEditCardName(onFinishEditCard);
   //const buttonCancel = buttonCancelEditCardName(cancelEdit);
-
+  field.classList.add("fieldEditCardText");
   field.appendChild(fieldName);
 
   function editON() {
     //showEditButons();
     fieldName.contentEditable = true;
     fieldName.focus();
+    fieldName.style.outline = "2px solid black";
   }
 
   //function cancelEdit() {
@@ -24,17 +25,17 @@ export default function fieldEditCardName(name, updateDeckEntry) {
 
   function onFinishEditCard() {
     let name = fieldName.textContent;
-    const newCardName = updateDeckEntry(name)
+    const newCardName = updateDeckEntry(name);
     //cardName = name;
     editOFF(newCardName);
   }
 
   function editOFF(name) {
     //hideEditButtons();
-    field.blur();
+    //fieldName.blur();
     fieldName.textContent = name;
     fieldName.contentEditable = false;
-    //updateDeckEntry(name);
+    fieldName.style.outline = "none";
   }
   /*
   function showEditButons() {
