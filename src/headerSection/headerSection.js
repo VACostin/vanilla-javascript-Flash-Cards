@@ -4,9 +4,11 @@ import buttonRemoveDeck from "./buttonRemoveDeck/buttonRemoveDeck.js";
 
 export default function headerSection() {
   const bigFunctionStack = new Object();
-  const deckList = document.querySelector("#deckList");
+  const deckSection = document.querySelector("#deckSection");
   const buttonAdd = buttonAddDeck(addDeck);
   const buttonRemove = buttonRemoveDeck(removeDeck);
+  const deckList = new Array();
+  let deckInFocus;
 
   function setCallBacks(functionStack) {
     bigFunctionStack.loadFlashCards = functionStack.loadFlashCards;
@@ -18,15 +20,17 @@ export default function headerSection() {
     const loadFlashCards = bigFunctionStack.loadFlashCards;
     const showFooter = bigFunctionStack.footer.show;
     const functionStack = {
+      setDeckInFocus,
       loadFlashCards,
       showFooter,
     };
     const defaultName = "NewDeck";
     const deckName = generateName(defaultName);
     //db query
-    const header = document.querySelector("#header");
-    const button = buttonOpenDeck(deckName, functionStack);
-    deckList.appendChild(button);
+    const buttonHandle = buttonOpenDeck(deckName, functionStack);
+    const button = buttonHandle.button;
+    deckSection.appendChild(button);
+    deckList.push(buttonHandle);
   }
 
   function generateName(name) {
@@ -48,13 +52,23 @@ export default function headerSection() {
     return nameList;
   }
 
+  function setDeckInFocus(deckName) {
+    deckInFocus = deckName;
+  }
+
+  function getDeckInFocus() {
+    return deckInFocus;
+  }
+
   function removeDeck() {
-    console.log("removed deck");
+    deckList.forEach((buttonHandle) => buttonHandle.setDeleteMode());
   }
 
   function changeDeckName(deckNameOld, deckName) {
     if (deckName !== deckNameOld) {
       deckName = generateName(deckName);
+
+      //place holder code, replace
       const oldId = "#buttonDeck_" + deckNameOld;
       const newId = "buttonDeck_" + deckName;
       const button = document.querySelector(oldId);

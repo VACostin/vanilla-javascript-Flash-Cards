@@ -24,7 +24,8 @@ export default function cardsSection(getDeckNameHandle) {
     let cardName = defaultCardName;
     //db query
     const cardWrap = cardWrapper(cardName, "description");
-    fieldCards.insertBefore(cardWrap, fieldCards.firstChild);
+    fieldCards.appendChild(cardWrap);
+    cardWrap.scrollIntoView();
   }
 
   function reset() {

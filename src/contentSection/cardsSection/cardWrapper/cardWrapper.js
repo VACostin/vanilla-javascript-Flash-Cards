@@ -1,16 +1,16 @@
-import fieldCard from "./fieldCard/fieldCard.js";
+import cardFace from "./cardFace/cardFace.js";
 
 export default function cardWrapper(name, description) {
   const cardWrap = document.createElement("div");
   const cardWrapInner = document.createElement("div");
-  const fieldCardFront = fieldCard(name);
-  const fieldCardBack = fieldCard(description);
-  const cardFront = fieldCardFront.card;
-  const cardBack = fieldCardBack.card;
-  cardFront.classList.add("cardFront");
-  cardBack.classList.add("cardBack");
+  const handleCardFront = cardFace(name);
+  const handleCardBack = cardFace(description);
+  const cardFront = handleCardFront.card;
+  const cardBack = handleCardBack.card;
   cardWrap.classList.add("cardWrap");
   cardWrapInner.classList.add("cardWrapInner");
+  cardFront.classList.add("cardFront");
+  cardBack.classList.add("cardBack");
   cardWrapInner.appendChild(cardFront);
   cardWrapInner.appendChild(cardBack);
   cardWrap.appendChild(cardWrapInner);
@@ -23,31 +23,29 @@ export default function cardWrapper(name, description) {
 
   function flip() {
     if (facingFront) {
-      const flipFlag = fieldCardFront.getFlipFlag();
+      const flipFlag = handleCardFront.getFlipFlag();
       switch (flipFlag) {
         case 0:
           break;
         case 1:
           cardWrapInner.style.transform = "rotateY(180deg)";
-          facingFront != facingFront;
-          console.log('flipping');
+          facingFront = !facingFront;
           break;
         case 2:
-          fieldCardFront.enableFlip();
+          handleCardFront.enableFlip();
           break;
       }
     } else {
-      const flipFlag = fieldCardBack.getFlipFlag();
+      const flipFlag = handleCardBack.getFlipFlag();
       switch (flipFlag) {
         case 0:
           break;
         case 1:
           cardWrapInner.style.transform = "rotateY(360deg)";
-          facingFront != facingFront;
-          console.log('flipping2');
+          facingFront = !facingFront;
           break;
         case 2:
-          fieldCardBack.enableFlip();
+          handleCardBack.enableFlip();
           break;
       }
     }
