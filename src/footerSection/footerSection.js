@@ -13,13 +13,22 @@ export default function footerSection(functionStack) {
     buttonAdd.remove();
   }
 
-  function disable() {
-    console.log("disabled footer");
+  function enableAll() {
+    show();
+    footer.style.pointerEvents = "auto";
+    footer.style.backgroundColor = "white";
+  }
+
+  function disableAll() {
+    hide();
+    footer.style.pointerEvents = "none";
+    footer.style.backgroundColor = "black";
   }
 
   return {
     show,
     hide,
-    disable,
+    enableAll,
+    disableAll,
   };
 }

@@ -5,6 +5,8 @@ import "./style.css";
 import "./reset.css";
 
 function initUI() {
+  localStorage.clear();
+  let editableFlag = true;
   const header = headerSection();
   let functionStack = getContentCallbacks();
   const content = contentSection(functionStack);
@@ -17,7 +19,8 @@ function initUI() {
   function getHeaderCallbacks() {
     const functionStack = new Object();
     functionStack.loadFlashCards = content.loadFlashCards;
-    functionStack.disableAllExcept = disableAllExcept;
+    functionStack.hideContent = content.hide;
+    functionStack.toggleAllExcept = toggleAllExcept;
     functionStack.footer = footer;
     return functionStack;
   }
@@ -34,8 +37,18 @@ function initUI() {
     return functionStack;
   }
 
-  function disableAllExcept(elementId) {
-    console.log("disabledAllbut " + elementId);
+  function toggleAllExcept(section) {
+    const sections = {
+      header: [content, footer],
+      content: [header, footer],
+      footer: [header, content],
+    };
+
+    const elementsToToggle = sections[section];
+    if (editableFlag)
+      elementsToToggle.forEach((element) => element.disableAll());
+    else elementsToToggle.forEach((element) => element.enableAll());
+    editableFlag = !editableFlag;
   }
 }
 

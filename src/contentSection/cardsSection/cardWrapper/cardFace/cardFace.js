@@ -34,13 +34,11 @@ export default function cardFace(text) {
   }
 
   function editCard() {
-    console.log('editingCard');
     hideCardButtons();
     handleFieldEditCardText.editON();
   }
 
   function updateCard(name) {
-    console.log("finished editing");
     showCardButtons();
     setPendingFlip();
     //do db here or one level up

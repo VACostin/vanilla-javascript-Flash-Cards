@@ -5,24 +5,37 @@ export default function contentSection(functionStack) {
   const content = document.querySelector("#content");
   const deckNameField = editDeckNameSection(functionStack);
   const getDeckName = deckNameField.getDeckName;
-  const cardsField = cardsSection(getDeckName);
+  const cardsSectionHandle = cardsSection(getDeckName);
+
+  function hide() {
+    deckNameField.reset();
+    cardsSectionHandle.reset();
+  }
 
   function loadFlashCards(deckName) {
-    cardsField.reset();
     deckNameField.show(deckName);
-    cardsField.load(deckName);
+    cardsSectionHandle.loadCards();
   }
 
   function addFlashCard() {
-    cardsField.addCard();
+    cardsSectionHandle.addCard();
   }
 
-  function disable() {
-    console.log("content section disabled");
+  function enableAll() {
+    content.style.pointerEvents = "auto";
+    content.style.backgroundColor = "white";
+  }
+
+  function disableAll() {
+    content.style.pointerEvents = "none";
+    content.style.backgroundColor = "black";
   }
 
   return {
+    hide,
     loadFlashCards,
     addFlashCard,
+    enableAll,
+    disableAll,
   };
 }

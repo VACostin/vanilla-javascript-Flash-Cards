@@ -1,18 +1,27 @@
 import buttonAddDeck from "./buttonAddDeck/buttonAddDeck.js";
 import buttonOpenDeck from "./buttonOpenDeck/buttonOpenDeck.js";
-import buttonRemoveDeck from "./buttonRemoveDeck/buttonRemoveDeck.js";
+import buttonSelectDecks from "./buttonSelectDecks/buttonSelectDecks.js";
+import buttonRemoveDecks from "./buttonRemoveDecks/buttonRemoveDecks.js";
+import deckNameQuerries from "./deckNameQuerries/deckNameQuerries.js";
 
 export default function headerSection() {
+  localStorage.clear();
+  const header = document.querySelector("#header");
   const bigFunctionStack = new Object();
   const deckSection = document.querySelector("#deckSection");
+  const addDeckSection = document.querySelector("#addDeck");
+  const selectDecksSection = document.querySelector("#selectDecks");
   const buttonAdd = buttonAddDeck(addDeck);
-  const buttonRemove = buttonRemoveDeck(removeDeck);
+  const buttonSelect = buttonSelectDecks(selectDecks);
+  const buttonRemove = buttonRemoveDecks(removeDecks);
   const deckList = new Array();
+  const db = deckNameQuerries();
   let deckInFocus;
 
   function setCallBacks(functionStack) {
     bigFunctionStack.loadFlashCards = functionStack.loadFlashCards;
-    bigFunctionStack.disableAllExcept = functionStack.disableAllExcept;
+    bigFunctionStack.hideContent = functionStack.hideContent;
+    bigFunctionStack.toggleAllExcept = functionStack.toggleAllExcept;
     bigFunctionStack.footer = functionStack.footer;
   }
 
@@ -26,7 +35,8 @@ export default function headerSection() {
     };
     const defaultName = "NewDeck";
     const deckName = generateName(defaultName);
-    //db query
+    const deckObject = {};
+    db.insertDeckObject(deckName, deckObject);
     const buttonHandle = buttonOpenDeck(deckName, functionStack);
     const button = buttonHandle.button;
     deckSection.appendChild(button);
@@ -34,22 +44,12 @@ export default function headerSection() {
   }
 
   function generateName(name) {
-    const nameList = getNameList();
+    const nameList = db.getAllDeckNames();
     const defaultName = name;
     for (let i = 1; nameList.includes(name); i++) {
       name = defaultName + i;
     }
     return name;
-  }
-
-  function getNameList() {
-    const nameList = [];
-    //db query instead
-    const buttons = document.querySelectorAll(".deck");
-    buttons.forEach((button) => {
-      nameList.push(button.textContent);
-    });
-    return nameList;
   }
 
   function setDeckInFocus(deckName) {
@@ -60,33 +60,81 @@ export default function headerSection() {
     return deckInFocus;
   }
 
-  function removeDeck() {
+  function selectDecks() {
+    const toggleAllExcept = bigFunctionStack.toggleAllExcept;
+    toggleAllExcept("header");
+    disableButonnAdd();
+    buttonAdd.disabled = true;
     deckList.forEach((buttonHandle) => buttonHandle.setDeleteMode());
+    selectDecksSection.removeChild(buttonSelect);
+    selectDecksSection.appendChild(buttonRemove);
+  }
+
+  function removeDecks() {
+    const toggleAllExcept = bigFunctionStack.toggleAllExcept;
+    toggleAllExcept("header");
+    enableButtonAdd();
+    buttonAdd.disabled = false;
+    deckList.forEach((buttonHandle) => {
+      buttonHandle.setNormalMode();
+      const deleteFlag = buttonHandle.getDeleteFlag();
+      if (deleteFlag) removeDeck(buttonHandle);
+    });
+    selectDecksSection.removeChild(buttonRemove);
+    selectDecksSection.appendChild(buttonSelect);
+    resetDeckView();
+  }
+
+  function enableButtonAdd() {
+    addDeckSection.appendChild(buttonAdd);
+    addDeckSection.style.backgroundColor = "white";
+  }
+
+  function disableButonnAdd() {
+    buttonAdd.remove();
+    addDeckSection.style.backgroundColor = "black";
+  }
+
+  function removeDeck(buttonHandle) {
+    const button = buttonHandle.button;
+    const deckName = buttonHandle.getDeckName();
+    db.removeDeckObject(deckName);
+    button.remove();
+  }
+
+  function resetDeckView() {
+    const nameList = db.getAllDeckNames();
+    if (!nameList.includes(deckInFocus))
+    {
+      bigFunctionStack.hideContent();
+      bigFunctionStack.footer.hide();
+    }
   }
 
   function changeDeckName(deckNameOld, deckName) {
     if (deckName !== deckNameOld) {
+      const button = buttonHandle.button;
       deckName = generateName(deckName);
-
-      //place holder code, replace
-      const oldId = "#buttonDeck_" + deckNameOld;
-      const newId = "buttonDeck_" + deckName;
-      const button = document.querySelector(oldId);
-      button.removeAttribute("id");
-      //db query
-      button.setAttribute("id", newId);
+      db.updateDeckObject(deckNameOld, deckName);
       button.textContent = deckName;
     }
     return deckName;
   }
 
+  function enableAll() {
+    header.style.pointerEvents = "auto";
+    header.style.backgroundColor = "white";
+  }
+
   function disableAll() {
-    console.log("disabling header");
+    header.style.pointerEvents = "none";
+    header.style.backgroundColor = "black";
   }
 
   return {
     setCallBacks,
     changeDeckName,
+    enableAll,
     disableAll,
   };
 }

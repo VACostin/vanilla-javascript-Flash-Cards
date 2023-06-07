@@ -42,10 +42,13 @@ export default function buttonOpenDeck(name, functionStack) {
   }
 
   function markForDelete() {
-    console.log(imageRedX);
     if (deleteFlag) button.style.backgroundImage = "none";
     else button.style.backgroundImage = "url(" + imageRedX + ")";
     deleteFlag = !deleteFlag;
+  }
+
+  function getDeleteFlag() {
+    return deleteFlag;
   }
 
   return {
@@ -54,5 +57,6 @@ export default function buttonOpenDeck(name, functionStack) {
     setDeckName,
     setNormalMode,
     setDeleteMode,
+    getDeleteFlag,
   };
 }

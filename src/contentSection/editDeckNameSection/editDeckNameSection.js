@@ -15,7 +15,8 @@ export default function editDeckNameSection(functionStack) {
   }
 
   function reset() {
-    fieldEditDeckName.removeChild(deckNameField.field);
+    if(fieldEditDeckName.firstChild)
+      fieldEditDeckName.removeChild(fieldEditDeckName.firstChild);
     hideButtons();
   }
 
