@@ -14,7 +14,7 @@ export default function headerSection() {
   const buttonAdd = buttonAddDeck(addDeck);
   const buttonSelect = buttonSelectDecks(selectDecks);
   const buttonRemove = buttonRemoveDecks(removeDecks);
-  const deckList = new Array();
+  let deckList = new Array();
   const db = deckNameQuerries();
   let deckInFocus;
 
@@ -100,12 +100,13 @@ export default function headerSection() {
     const deckName = buttonHandle.getDeckName();
     db.removeDeckObject(deckName);
     button.remove();
+    deckList = deckList.filter(deck => deck.getDeckName() != deckName);
+    console.log(deckList);
   }
 
   function resetDeckView() {
     const nameList = db.getAllDeckNames();
-    if (!nameList.includes(deckInFocus))
-    {
+    if (!nameList.includes(deckInFocus)) {
       bigFunctionStack.hideContent();
       bigFunctionStack.footer.hide();
     }
@@ -113,12 +114,23 @@ export default function headerSection() {
 
   function changeDeckName(deckNameOld, deckName) {
     if (deckName !== deckNameOld) {
-      const button = buttonHandle.button;
-      deckName = generateName(deckName);
-      db.updateDeckObject(deckNameOld, deckName);
-      button.textContent = deckName;
+      const buttonHandle = getButtonHandle(deckNameOld);
+      const deckNameNew = generateName(deckName);
+      db.updateDeckObject(deckNameOld, deckNameNew);
+      buttonHandle.setDeckName(deckNameNew);
+      if(deckNameOld == getDeckInFocus())
+        setDeckInFocus(deckNameNew);
     }
     return deckName;
+  }
+
+  function getButtonHandle(deckName) {
+    let myButtonHanndle;
+    deckList.forEach((buttonHandle) => {
+      if (buttonHandle.getDeckName() == deckName)
+        myButtonHanndle = buttonHandle;
+    });
+    return myButtonHanndle;
   }
 
   function enableAll() {

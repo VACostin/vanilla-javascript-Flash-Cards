@@ -14,6 +14,7 @@ export default function contentSection(functionStack) {
 
   function loadFlashCards(deckName) {
     deckNameField.show(deckName);
+    cardsSectionHandle.reset();
     cardsSectionHandle.loadCards();
   }
 

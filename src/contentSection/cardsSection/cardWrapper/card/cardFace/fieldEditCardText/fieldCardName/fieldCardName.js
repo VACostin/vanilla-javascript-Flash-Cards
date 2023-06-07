@@ -3,6 +3,7 @@ export default function fieldCardName(name, onFinishEditCard) {
   field.textContent = name;
   field.classList.add('cardName');
   field.addEventListener('focusout', () => onFinishEditCard());
+  field.addEventListener('touchmove', ()=> onFinishEditCard());
 
   return field;
 }

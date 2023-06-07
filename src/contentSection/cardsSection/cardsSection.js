@@ -1,5 +1,5 @@
 import cardWrapper from "./cardWrapper/cardWrapper.js";
-import cardQuerries from "./cardWrapper/cardFace/cardQuerries/cardQuerries.js";
+import cardQuerries from "./cardWrapper/card/cardFace/cardQuerries/cardQuerries.js";
 
 export default function cardsSection(getDeckNameHandle) {
   const fieldCards = document.querySelector("#fieldCards");
@@ -7,29 +7,22 @@ export default function cardsSection(getDeckNameHandle) {
   const db = cardQuerries();
 
   function loadCards() {
-    //reset
     const deckName = getDeckName();
-    const cards = db.getAllCardObjects(deckName);
-    //foreach card
-    //fieldCards.append(card)
+    const cardObjects = db.getAllCardObjects(deckName);
+    cardObjects.forEach((cardObject) => {
+      const cardWrap = cardWrapper(cardObject, getDeckName);
+      fieldCards.appendChild(cardWrap);
+    });
   }
 
   function reset() {
-    while (fieldCards.firstChild) {
-      fieldCards.removeChild(fieldCards.firstChild);
-    }
+    while (fieldCards.firstChild) fieldCards.removeChild(fieldCards.firstChild);
   }
 
   function addCard() {
     const deckName = getDeckName();
-    const defaultCardName = "NewCard";
-    let cardName = defaultCardName;
-    const nameList = db.getAllCardNames(deckName);
-    for (let i = 1; nameList.includes(cardName); i++)
-      cardName = defaultCardName + i;
-    db.insertCardObject(deckName, cardName);
-    console.log(JSON.parse(localStorage.getItem("NewDeck"))[cardName]);
-    const cardWrap = cardWrapper(cardName, "description");
+    const cardObject = db.insertCardObject(deckName);
+    const cardWrap = cardWrapper(cardObject, getDeckName);
     fieldCards.appendChild(cardWrap);
     cardWrap.scrollIntoView();
   }
