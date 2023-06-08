@@ -18,6 +18,7 @@ export default function deckSection(loadFlashCards, showFooter) {
     const button = handleButtonOpen.button;
     deckList.push(handleButtonOpen);
     deckSection.appendChild(button);
+    button.scrollIntoView();
   }
 
   function removeDecks() {
