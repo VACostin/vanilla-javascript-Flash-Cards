@@ -1,12 +1,8 @@
-import buttonCancelEditDeckName from "./buttonCancelEditDeckName/buttonCancelEditDeckName";
-import buttonDoneEditDeckName from "./buttonDoneEditDeckName/buttonDoneEditDeckName";
 import fieldDeckName from "./fieldDeckName/fieldDeckName";
 
 export default function editDeckNameSection(functionStack) {
   const changeDeckName = functionStack.changeDeckName;
   const fieldEditDeckName = document.querySelector("#fieldEditDeckName");
-  const buttonDone = buttonDoneEditDeckName(doneEditDeckName);
-  const buttonCancel = buttonCancelEditDeckName(cancelEditDeckName);
   const deckNameField = fieldDeckName(editDeckName, doneEditDeckName);
 
   function show(deckName) {
@@ -17,7 +13,6 @@ export default function editDeckNameSection(functionStack) {
   function reset() {
     if(fieldEditDeckName.firstChild)
       fieldEditDeckName.removeChild(fieldEditDeckName.firstChild);
-    hideButtons();
   }
 
   function doneEditDeckName() {
@@ -29,32 +24,14 @@ export default function editDeckNameSection(functionStack) {
       const newDeckName = deckNameField.getInput();
       const deckName = changeDeckName(oldDeckName, newDeckName);
       deckNameField.setDeckName(deckName);
-      hideButtons();
     }
-  }
-
-  function cancelEditDeckName() {
-    deckNameField.setFlag(false);
-    deckNameField.resetInput();
-    hideButtons();
   }
 
   function editDeckName() {
     const editFlag = deckNameField.getFlag();
     if (!editFlag) {
-      showButtons();
       deckNameField.setFlag(true);
     }
-  }
-
-  function showButtons() {
-    //fieldEditDeckName.appendChild(buttonDone);
-    //fieldEditDeckName.appendChild(buttonCancel);
-  }
-
-  function hideButtons() {
-    //buttonDone.remove();
-    //buttonCancel.remove();
   }
 
   function getDeckName() {
