@@ -1,11 +1,14 @@
 import fieldCardName from "./fieldCardName/fieldCardName.js";
 
 export default function fieldEditCardText(textInput, onUpdateDeckEntry) {
-
   const field = document.createElement("div");
   const fieldName = fieldCardName(textInput, finishEditCard);
-  field.classList.add("fieldEditCardText");
-  field.appendChild(fieldName);
+  init();
+
+  function init() {
+    field.classList.add("fieldEditCardText");
+    field.appendChild(fieldName);
+  }
 
   function editON() {
     fieldName.contentEditable = true;

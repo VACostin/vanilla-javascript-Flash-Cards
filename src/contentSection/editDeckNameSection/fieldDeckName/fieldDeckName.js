@@ -14,10 +14,6 @@ export default function fieldDeckName(onEditDeckName, onDoneEditDeckName) {
     return field.textContent;
   }
 
-  function resetInput() {
-    field.textContent = deckName;
-  }
-
   function getDeckName() {
     return deckName;
   }
@@ -43,7 +39,6 @@ export default function fieldDeckName(onEditDeckName, onDoneEditDeckName) {
     setFlag,
     getFlag,
     getInput,
-    resetInput,
     getDeckName,
     setDeckName,
   };
