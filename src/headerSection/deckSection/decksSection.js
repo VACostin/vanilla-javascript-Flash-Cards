@@ -13,11 +13,9 @@ export default function deckSection(loadFlashCards, showFooter) {
   let deckInFocus = "";
 
   function addDeck() {
-    const defaultName = "NewDeck";
-    const deckName = generateName(defaultName);
+    const deckName = db.insertNewDeckObject();
     const handleButtonOpen = buttonOpenDeck(deckName, bigFunctionStack);
     const button = handleButtonOpen.button;
-    db.insertNewDeckObject(deckName);
     deckList.push(handleButtonOpen);
     deckSection.appendChild(button);
   }
@@ -38,22 +36,13 @@ export default function deckSection(loadFlashCards, showFooter) {
     deckList = deckList.filter((deck) => deck.getDeckName() != deckName); //callback
   }
 
-  function generateName(name) {
-    const nameList = db.getAllDeckNames();
-    const defaultName = name;
-    for (let i = 1; nameList.includes(name); i++) {
-      name = defaultName + i;
-    }
-    return name;
-  }
-
   function changeDeckName(deckNameOld, deckName) {
     if (deckName !== deckNameOld) {
       const buttonHandle = getButtonHandle(deckNameOld);
-      const deckNameNew = generateName(deckName);
-      db.updateDeckObject(deckNameOld, deckNameNew);
+      const deckNameNew = db.updateDeckObject(deckNameOld, deckName);
       buttonHandle.setDeckName(deckNameNew);
       if (deckNameOld == getDeckInFocus()) setDeckInFocus(deckNameNew);
+      return deckNameNew;
     }
     return deckName;
   }
@@ -63,7 +52,7 @@ export default function deckSection(loadFlashCards, showFooter) {
   }
 
   function getDeckInFocus() {
-    return deckName;
+    return deckInFocus;
   }
 
   function setDeleteMode() {

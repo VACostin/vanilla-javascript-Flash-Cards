@@ -13,13 +13,13 @@ export default function addDeckSection(onAddDeck) {
   function enable() {
     addDeckSection.appendChild(buttonAdd);
     addDeckSection.style.backgroundColor = "white";
-    buttonAdd.disabled = true;
+    buttonAdd.disabled = false;
   }
 
   function disable() {
     buttonAdd.remove();
     addDeckSection.style.backgroundColor = "black";
-    buttonAdd.disabled = false;
+    buttonAdd.disabled = true;
   }
 
   return {

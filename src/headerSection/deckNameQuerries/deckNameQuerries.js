@@ -1,6 +1,14 @@
+const DEFAULT_NAME = "New Deck";
+
 export default function deckNameQuerries() {
-  function insertNewDeckObject(deckName) {
+  function insertNewDeckObject() {
+    const deckName = generateName(DEFAULT_NAME);
     const deckObject = {};
+    localStorage.setItem(deckName, JSON.stringify(deckObject));
+    return deckName;
+  }
+
+  function insertDeckObject(deckName, deckObject) {
     localStorage.setItem(deckName, JSON.stringify(deckObject));
   }
 
@@ -17,8 +25,19 @@ export default function deckNameQuerries() {
 
   function updateDeckObject(deckNameOld, deckName) {
     const deckObject = getDeckObject(deckNameOld);
+    const deckNameNew = generateName(deckName);
     removeDeckObject(deckNameOld);
-    insertDeckObject(deckName, deckObject);
+    insertDeckObject(deckNameNew, deckObject);
+    return deckNameNew;
+  }
+
+  function generateName(deckName) {
+    const nameList = getAllDeckNames();
+    const defaultName = deckName;
+    for (let i = 1; nameList.includes(deckName); i++) {
+      deckName = defaultName + i;
+    }
+    return deckName;
   }
 
   function removeDeckObject(deckName) {
@@ -28,6 +47,7 @@ export default function deckNameQuerries() {
   return {
     insertNewDeckObject,
     getDeckObject,
+    generateName,
     getAllDeckNames,
     updateDeckObject,
     removeDeckObject,

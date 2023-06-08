@@ -1,6 +1,5 @@
 import addDeckSection from "./addDeckSection/addDeckSection";
 import deckSection from "./deckSection/decksSection";
-import deckSection from "./deckSection/decksSection";
 import selectDecksSection from "./selectDecksSection/selectDecksSection";
 
 export default function headerSection() {
@@ -12,7 +11,6 @@ export default function headerSection() {
   const handleSelectDecksSection = selectDecksSection(getSelectDecksCallBacks);
 
   function setCallBacks(functionStack) {
-    deckSectionCallBacks = {};
     bigFunctionStack.loadFlashCards = functionStack.loadFlashCards;
     bigFunctionStack.hideContent = functionStack.hideContent;
     bigFunctionStack.toggleAllExcept = functionStack.toggleAllExcept;
@@ -23,25 +21,29 @@ export default function headerSection() {
     handleDeckSection.addDeck();
   }
 
-  function loadFlashCards() {
-    bigFunctionStack.loadFlashCards();
+  function changeDeckName(deckNameOld, deckName) {
+    return handleDeckSection.changeDeckName(deckNameOld, deckName);
+  }
+
+  function loadFlashCards(deckName) {
+    bigFunctionStack.loadFlashCards(deckName);
   }
 
   function showFooter() {
-    bigFunctionStack.showFooter();
+    bigFunctionStack.footer.show();
   }
 
   function getSelectDecksCallBacks() {
     const toggleAllExcept = bigFunctionStack.toggleAllExcept;
     const enableButtonAdd = handleAddDeckSection.enable;
-    const disableButonnAdd = handleAddDeckSection.disable;
+    const disableButtonAdd = handleAddDeckSection.disable;
     const setDeleteMode = handleDeckSection.setDeleteMode;
     const removeDecks = handleDeckSection.removeDecks;
 
     const functionStack = {
       toggleAllExcept,
       enableButtonAdd,
-      disableButonnAdd,
+      disableButtonAdd,
       setDeleteMode,
       removeDecks,
       resetDeckView,
