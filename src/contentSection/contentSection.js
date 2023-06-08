@@ -1,9 +1,9 @@
 import editDeckNameSection from "./editDeckNameSection/editDeckNameSection.js";
 import cardsSection from "./cardsSection/cardsSection.js";
 
-export default function contentSection(functionStack) {
+export default function contentSection(onChangeDeckName) {
   const content = document.querySelector("#content");
-  const deckNameField = editDeckNameSection(functionStack);
+  const deckNameField = editDeckNameSection(onChangeDeckName);
   const getDeckName = deckNameField.getDeckName;
   const cardsSectionHandle = cardsSection(getDeckName);
 

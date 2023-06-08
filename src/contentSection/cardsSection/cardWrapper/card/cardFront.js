@@ -8,10 +8,10 @@ export default function cardFront(cardObject, getDeckName, setCardName) {
   const card = cardHandle.card;
   card.classList.add("cardFront");
 
-  function updateCardObject(textInput) {
+  function updateCardObject(newName) {
     const deckName = getDeckName();
-    if (textInput == cardObject.title) return textInput;
-    cardObject.titleNew = textInput;
+    if (newName == cardObject.title) return newName;
+    cardObject.titleNew = newName;
     console.log(cardObject.titleNew);
     cardName = db.updateCardObjectName(deckName, cardObject);
     console.log(cardObject.titleNew);

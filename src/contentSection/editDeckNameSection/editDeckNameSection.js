@@ -1,7 +1,7 @@
 import fieldDeckName from "./fieldDeckName/fieldDeckName";
 
-export default function editDeckNameSection(functionStack) {
-  const changeDeckName = functionStack.changeDeckName;
+export default function editDeckNameSection(onChangeDeckName) {
+  const changeDeckName = onChangeDeckName;
   const fieldEditDeckName = document.querySelector("#fieldEditDeckName");
   const deckNameField = fieldDeckName(editDeckName, doneEditDeckName);
 

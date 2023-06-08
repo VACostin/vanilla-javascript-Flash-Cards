@@ -1,11 +1,8 @@
 import imageRedX from "./Red_X.svg";
 
-export default function buttonOpenDeck(name, functionStack) {
+export default function buttonOpenDeck(name, onOpenDeck) {
   let deckName = name;
   let deleteFlag = false;
-  const setDeckInFocus = functionStack.setDeckInFocus;
-  const loadFlashCards = functionStack.loadFlashCards;
-  const showFooter = functionStack.showFooter;
   const button = document.createElement("button");
   init();
 
@@ -36,9 +33,7 @@ export default function buttonOpenDeck(name, functionStack) {
   }
 
   function openDeck() {
-    setDeckInFocus(deckName);
-    loadFlashCards(deckName);
-    showFooter();
+    onOpenDeck(deckName);
   }
 
   function markForDelete() {

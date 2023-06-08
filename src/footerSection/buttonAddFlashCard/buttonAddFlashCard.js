@@ -1,5 +1,5 @@
-export default function buttonAddFlashCard(addFlashCard) {
+export default function buttonAddFlashCard(onAddFlashCard) {
   const button = document.querySelector("#buttonAddFlashCard");
-  button.addEventListener("click", () => addFlashCard());
+  button.addEventListener("click", () => onAddFlashCard());
   return button;
 }

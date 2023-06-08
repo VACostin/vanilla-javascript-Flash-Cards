@@ -1,7 +1,14 @@
-export default function fieldDeckName(callbackFunction, callbackFunction2) {
+export default function fieldDeckName(onEditDeckName, onDoneEditDeckName) {
   let deckName = "";
   let editFlag = false;
   const field = document.createElement("p");
+  init();
+
+  function init() {
+    field.setAttribute("id", "fieldDeckName");
+    field.addEventListener("click", () => onEditDeckName());
+    field.addEventListener("blur", () => onDoneEditDeckName());
+  }
 
   function getInput() {
     return field.textContent;
@@ -30,10 +37,6 @@ export default function fieldDeckName(callbackFunction, callbackFunction2) {
   function getFlag() {
     return editFlag;
   }
-
-  field.setAttribute("id", "fieldDeckName");
-  field.addEventListener("click", () => callbackFunction());
-  field.addEventListener("blur", () => callbackFunction2());
   
   return {
     field,

@@ -1,9 +1,9 @@
-export default function buttonRemoveCard(removeCard) {
+export default function buttonRemoveCard(onRemoveCard) {
   const button = document.createElement("button");
 
   button.classList.add("buttonRemoveCard");
   button.textContent = "X";
-  button.addEventListener("click", () => removeCard());
+  button.addEventListener("click", () => onRemoveCard());
 
   return button;
 }

@@ -1,9 +1,9 @@
 import fieldCardName from "./fieldCardName/fieldCardName.js";
 
-export default function fieldEditCardText(name, updateDeckEntry) {
+export default function fieldEditCardText(textInput, onUpdateDeckEntry) {
 
   const field = document.createElement("div");
-  const fieldName = fieldCardName(name, onFinishEditCard);
+  const fieldName = fieldCardName(textInput, finishEditCard);
   field.classList.add("fieldEditCardText");
   field.appendChild(fieldName);
 
@@ -13,14 +13,14 @@ export default function fieldEditCardText(name, updateDeckEntry) {
     fieldName.style.outline = "2px solid black";
   }
 
-  function onFinishEditCard() {
-    let name = fieldName.textContent;
-    const newCardName = updateDeckEntry(name);
-    editOFF(newCardName);
+  function finishEditCard() {
+    const textInput = fieldName.textContent;
+    const processedTextInput = onUpdateDeckEntry(textInput);
+    editOFF(processedTextInput);
   }
 
-  function editOFF(name) {
-    fieldName.textContent = name;
+  function editOFF(newText) {
+    fieldName.textContent = newText;
     fieldName.contentEditable = false;
     fieldName.style.outline = "none";
   }

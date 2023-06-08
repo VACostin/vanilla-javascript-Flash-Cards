@@ -6,9 +6,9 @@ export default function headerSection() {
   localStorage.clear();
   const header = document.querySelector("#header");
   const bigFunctionStack = new Object();
-  const handleDeckSection = deckSection(loadFlashCards, showFooter);
+  const handleDeckSection = deckSection(openDeck);
   const handleAddDeckSection = addDeckSection(addDeck);
-  const handleSelectDecksSection = selectDecksSection(getSelectDecksCallBacks);
+  const handleSelectDecksSection = selectDecksSection(selectDecks, removeDecks);
 
   function setCallBacks(functionStack) {
     bigFunctionStack.loadFlashCards = functionStack.loadFlashCards;
@@ -25,31 +25,18 @@ export default function headerSection() {
     return handleDeckSection.changeDeckName(deckNameOld, deckName);
   }
 
+  function openDeck(deckName) {
+    loadFlashCards(deckName);
+    showFooter(deckName);
+  }
+
+
   function loadFlashCards(deckName) {
     bigFunctionStack.loadFlashCards(deckName);
   }
 
   function showFooter() {
     bigFunctionStack.footer.show();
-  }
-
-  function getSelectDecksCallBacks() {
-    const toggleAllExcept = bigFunctionStack.toggleAllExcept;
-    const enableButtonAdd = handleAddDeckSection.enable;
-    const disableButtonAdd = handleAddDeckSection.disable;
-    const setDeleteMode = handleDeckSection.setDeleteMode;
-    const removeDecks = handleDeckSection.removeDecks;
-
-    const functionStack = {
-      toggleAllExcept,
-      enableButtonAdd,
-      disableButtonAdd,
-      setDeleteMode,
-      removeDecks,
-      resetDeckView,
-    };
-
-    return functionStack;
   }
 
   function resetDeckView() {
@@ -67,6 +54,25 @@ export default function headerSection() {
   function disableAll() {
     header.style.pointerEvents = "none";
     header.style.backgroundColor = "black";
+  }
+
+  function selectDecks() {
+    const toggleAllExcept = bigFunctionStack.toggleAllExcept
+    const disableButtonAdd = handleAddDeckSection.disable;
+    const setDeleteMode = handleDeckSection.setDeleteMode;
+    toggleAllExcept("header");
+    disableButtonAdd();
+    setDeleteMode();
+  }
+
+  function removeDecks() {
+    const toggleAllExcept = bigFunctionStack.toggleAllExcept
+    const enableButtonAdd = handleAddDeckSection.enable;
+    const onRemoveDecks = handleDeckSection.removeDecks;
+    toggleAllExcept("header");
+    enableButtonAdd();
+    onRemoveDecks();
+    resetDeckView();
   }
 
   return {

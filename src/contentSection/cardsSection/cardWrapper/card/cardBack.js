@@ -8,9 +8,9 @@ export default function cardBack(cardObject, getDeckName, getCardName) {
   const card = cardHandle.card;
   card.classList.add("cardBack");
 
-  function updateCardObject(textInput) {
+  function updateCardObject(property, value) {
     const deckName = getDeckName();
-    cardObject.description = textInput;
+    cardObject[property] = value;
     cardObject.title = getCardName();
     db.updateCardObjectProperty(deckName, cardObject);
     return textInput;

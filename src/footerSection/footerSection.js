@@ -1,9 +1,8 @@
 import buttonAddFlashCard from "./buttonAddFlashCard/buttonAddFlashCard.js";
 
-export default function footerSection(functionStack) {
-  const addFlashCard = functionStack.addFlashCard;
+export default function footerSection(onAddFlashCard) {
   const footer = document.querySelector("#footer");
-  const buttonAdd = buttonAddFlashCard(addFlashCard);
+  const buttonAdd = buttonAddFlashCard(onAddFlashCard);
 
   function show() {
     footer.appendChild(buttonAdd);

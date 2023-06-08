@@ -1,10 +1,8 @@
 import buttonAddDeck from "./buttonAddDeck/buttonAddDeck.js";
-import deckNameQuerries from "../deckNameQuerries/deckNameQuerries.js";
 
 export default function addDeckSection(onAddDeck) {
   const addDeckSection = document.querySelector("#addDeck");
   const buttonAdd = buttonAddDeck(addDeck);
-  const db = deckNameQuerries();
 
   function addDeck() {
     onAddDeck();

@@ -1,10 +1,10 @@
-export default function buttonEditCard(disableFlip, editCard) {
+export default function buttonEditCard(onDisableFlip, onEditCard) {
   const button = document.createElement("button");
 
   button.classList.add("buttonEditCard");
   button.textContent = "E";
-  button.addEventListener("mousedown", () => disableFlip());
-  button.addEventListener("click", () => editCard());
+  button.addEventListener("mousedown", () => onDisableFlip());
+  button.addEventListener("click", () => onEditCard());
 
   return button;
 }

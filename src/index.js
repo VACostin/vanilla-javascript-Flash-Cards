@@ -8,15 +8,12 @@ function initUI() {
   localStorage.clear();
   let editableFlag = true;
   const header = headerSection();
-  let functionStack = getContentCallbacks();
-  const content = contentSection(functionStack);
-  functionStack = getFooterCallBacks();
-  const footer = footerSection(functionStack);
-  functionStack = getHeaderCallbacks();
-  header.setCallBacks(functionStack);
+  const content = contentSection(contentCallBacks());
+  const footer = footerSection(footerCallbacks());
+  header.setCallBacks(headerCallbacks());
   footer.hide();
 
-  function getHeaderCallbacks() {
+  function headerCallbacks() {
     const functionStack = new Object();
     functionStack.loadFlashCards = content.loadFlashCards;
     functionStack.hideContent = content.hide;
@@ -25,13 +22,13 @@ function initUI() {
     return functionStack;
   }
 
-  function getContentCallbacks() {
+  function contentCallBacks() {
     const functionStack = new Object();
     functionStack.changeDeckName = header.changeDeckName;
     return functionStack;
   }
 
-  function getFooterCallBacks() {
+  function footerCallbacks() {
     const functionStack = new Object();
     functionStack.addFlashCard = content.addFlashCard;
     return functionStack;
@@ -43,7 +40,6 @@ function initUI() {
       content: [header, footer],
       footer: [header, content],
     };
-
     const elementsToToggle = sections[section];
     if (editableFlag)
       elementsToToggle.forEach((element) => element.disableAll());
