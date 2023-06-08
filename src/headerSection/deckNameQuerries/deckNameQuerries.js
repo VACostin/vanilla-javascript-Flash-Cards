@@ -1,5 +1,6 @@
 export default function deckNameQuerries() {
-  function insertDeckObject(deckName, deckObject) {
+  function insertNewDeckObject(deckName) {
+    const deckObject = {};
     localStorage.setItem(deckName, JSON.stringify(deckObject));
   }
 
@@ -25,7 +26,7 @@ export default function deckNameQuerries() {
   }
 
   return {
-    insertDeckObject,
+    insertNewDeckObject,
     getDeckObject,
     getAllDeckNames,
     updateDeckObject,
