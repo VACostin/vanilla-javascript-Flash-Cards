@@ -33,7 +33,7 @@ export default function fieldDeckName(onEditDeckName, onDoneEditDeckName) {
   function getFlag() {
     return editFlag;
   }
-  
+
   return {
     field,
     setFlag,

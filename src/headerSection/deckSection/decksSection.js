@@ -19,7 +19,7 @@ export default function deckSection(onOpenDeck) {
   function openDeck(deckName) {
     setDeckInFocus(deckName);
     onOpenDeck(deckName);
-  } 
+  }
 
   function removeDecks() {
     deckList.forEach((buttonHandle) => {

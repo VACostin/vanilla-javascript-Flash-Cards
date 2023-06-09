@@ -21,15 +21,18 @@ export default function headerSection() {
     handleDeckSection.addDeck();
   }
 
+  function toggleAllExcept(section) {
+    bigFunctionStack.toggleAllExcept(section);
+  }
+
   function changeDeckName(deckNameOld, deckName) {
     return handleDeckSection.changeDeckName(deckNameOld, deckName);
   }
 
   function openDeck(deckName) {
     loadFlashCards(deckName);
-    showFooter(deckName);
+    showFooter();
   }
-
 
   function loadFlashCards(deckName) {
     bigFunctionStack.loadFlashCards(deckName);
@@ -45,7 +48,7 @@ export default function headerSection() {
       bigFunctionStack.footer.hide();
     }
   }
- 
+
   function enableAll() {
     header.style.pointerEvents = "auto";
     header.style.backgroundColor = "white";
@@ -57,7 +60,7 @@ export default function headerSection() {
   }
 
   function selectDecks() {
-    const toggleAllExcept = bigFunctionStack.toggleAllExcept
+    const toggleAllExcept = bigFunctionStack.toggleAllExcept;
     const disableButtonAdd = handleAddDeckSection.disable;
     const setDeleteMode = handleDeckSection.setDeleteMode;
     toggleAllExcept("header");
@@ -66,7 +69,7 @@ export default function headerSection() {
   }
 
   function removeDecks() {
-    const toggleAllExcept = bigFunctionStack.toggleAllExcept
+    const toggleAllExcept = bigFunctionStack.toggleAllExcept;
     const enableButtonAdd = handleAddDeckSection.enable;
     const onRemoveDecks = handleDeckSection.removeDecks;
     toggleAllExcept("header");

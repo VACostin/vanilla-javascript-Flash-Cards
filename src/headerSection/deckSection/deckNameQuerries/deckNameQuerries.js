@@ -46,8 +46,6 @@ export default function deckNameQuerries() {
 
   return {
     insertNewDeckObject,
-    getDeckObject,
-    generateName,
     getAllDeckNames,
     updateDeckObject,
     removeDeckObject,

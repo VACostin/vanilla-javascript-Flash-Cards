@@ -1,22 +1,22 @@
 {
-    "deckName":[
-       {
-          "cardName":{
-             "description":"descriptionText",
-             "textColor":"colorCode",
-             "backgroundColor":"colorCode"
-          }
-       }
-    ]
+"deckName":[
+{
+"cardName":{
+"description":"descriptionText",
+"textColor":"colorCode",
+"backgroundColor":"colorCode"
+}
+}
+]
 },
 {
-    "deckName1":[
-       {
-          "cardName":{
-             "description":"descriptionText",
-             "textColor":"colorCode",
-             "backgroundColor":"colorCode"
-          }
-       }
-    ]
+"deckName1":[
+{
+"cardName":{
+"description":"descriptionText",
+"textColor":"colorCode",
+"backgroundColor":"colorCode"
+}
+}
+]
 }

@@ -23,15 +23,11 @@ function initUI() {
   }
 
   function contentCallBacks() {
-    const functionStack = new Object();
-    functionStack.changeDeckName = header.changeDeckName;
-    return functionStack;
+    return header.changeDeckName;
   }
 
   function footerCallbacks() {
-    const functionStack = new Object();
-    functionStack.addFlashCard = content.addFlashCard;
-    return functionStack;
+    return content.addFlashCard;
   }
 
   function toggleAllExcept(section) {

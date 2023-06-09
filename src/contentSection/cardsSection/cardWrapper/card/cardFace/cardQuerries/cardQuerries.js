@@ -53,7 +53,7 @@ export default function cardQuerries() {
     const cardNameOld = cardObject.title;
     const defaultCardName = cardObject.titleNew;
     delete cardObject.titleNew;
-    deleteCardObject(deckName, cardNameOld)
+    deleteCardObject(deckName, cardNameOld);
     const cardNameNew = generateName(deckName, defaultCardName);
     cardObject.title = cardNameNew;
     const deckObject = JSON.parse(localStorage.getItem(deckName));

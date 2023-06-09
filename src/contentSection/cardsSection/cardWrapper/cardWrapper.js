@@ -12,7 +12,7 @@ export default function cardWrapper(cardObject, getDeckName) {
 
   function init() {
     const cardFront = cardFrontHandle.card;
-    const cardBack = cardBackHandle.card; 
+    const cardBack = cardBackHandle.card;
     cardWrap.classList.add("cardWrap");
     cardWrapInner.classList.add("cardWrapInner");
     cardWrapInner.appendChild(cardFront);

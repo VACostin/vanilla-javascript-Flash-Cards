@@ -11,7 +11,7 @@ export default function editDeckNameSection(onChangeDeckName) {
   }
 
   function reset() {
-    if(fieldEditDeckName.firstChild)
+    if (fieldEditDeckName.firstChild)
       fieldEditDeckName.removeChild(fieldEditDeckName.firstChild);
   }
 

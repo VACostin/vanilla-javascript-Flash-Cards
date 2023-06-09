@@ -12,9 +12,7 @@ export default function cardFront(cardObject, getDeckName, setCardName) {
     const deckName = getDeckName();
     if (newName == cardObject.title) return newName;
     cardObject.titleNew = newName;
-    console.log(cardObject.titleNew);
     cardName = db.updateCardObjectName(deckName, cardObject);
-    console.log(cardObject.titleNew);
     setCardName(cardName);
     return cardName;
   }
