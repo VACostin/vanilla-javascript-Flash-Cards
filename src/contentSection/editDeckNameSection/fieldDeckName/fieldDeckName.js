@@ -16,6 +16,7 @@ export default function fieldDeckName(onEditDeckName, onDoneEditDeckName) {
   }
 
   function getInput() {
+    if (!/\S/.test(field.textContent)) return "New Deck";
     return field.textContent;
   }
 
