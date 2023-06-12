@@ -1,12 +1,24 @@
 import buttonEditCard from "./buttonEditCard/buttonEditCard.js";
 import buttonRemoveCard from "./buttonRemoveCard/buttonRemoveCard.js";
+import buttonColorCard from "./buttonColorCard/buttonColorCard.js";
 import fieldEditCardText from "./fieldEditCardText/fieldEditCardText.js";
 
-export default function cardFace(cardText, updateCardObject, removeCardObject) {
+export default function cardFace(
+  cardText,
+  updateCardObject,
+  removeCardObject,
+  onUpdateCardColor
+) {
   const card = document.createElement("div");
   const handleFieldEditCardText = fieldEditCardText(cardText, updateCardText);
   const buttonEdit = buttonEditCard(disableFlip, editCard);
   const buttonRemove = buttonRemoveCard(removeCard);
+  const buttonColor = buttonColorCard(
+    card,
+    showColors,
+    hideColors,
+    changeColor
+  );
   let flipFlag = 1;
   init();
 
@@ -16,6 +28,7 @@ export default function cardFace(cardText, updateCardObject, removeCardObject) {
     card.appendChild(field);
     card.appendChild(buttonEdit);
     card.appendChild(buttonRemove);
+    card.appendChild(buttonColor);
   }
 
   function disableFlip() {
@@ -49,15 +62,33 @@ export default function cardFace(cardText, updateCardObject, removeCardObject) {
   function showCardButtons() {
     card.appendChild(buttonEdit);
     card.appendChild(buttonRemove);
+    card.appendChild(buttonColor);
   }
 
   function hideCardButtons() {
     buttonEdit.remove();
     buttonRemove.remove();
+    buttonColor.remove();
   }
 
   function removeCard() {
     removeCardObject();
+  }
+
+  function showColors() {
+    buttonEdit.remove();
+    buttonRemove.remove();
+    disableFlip();
+  }
+
+  function hideColors() {
+    card.appendChild(buttonEdit);
+    card.appendChild(buttonRemove);
+    setPendingFlip();
+  }
+
+  function changeColor(color) {
+    onUpdateCardColor(color);
   }
 
   return {

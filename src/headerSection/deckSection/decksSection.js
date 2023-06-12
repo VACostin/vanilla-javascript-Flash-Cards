@@ -6,6 +6,19 @@ export default function deckSection(onOpenDeck) {
   const db = deckNameQuerries();
   let deckList = new Array();
   let deckInFocus = "";
+  loadAllDecks();
+
+  function loadAllDecks() {
+    const nameList = db.getAllDeckNames();
+    nameList.forEach((deckName) => loadDeck(deckName));
+  }
+
+  function loadDeck(deckName) {
+    const handleButtonOpen = buttonOpenDeck(deckName, openDeck);
+    const button = handleButtonOpen.button;
+    deckList.push(handleButtonOpen);
+    deckSection.appendChild(button);
+  }
 
   function addDeck() {
     const deckName = db.insertNewDeckObject();
@@ -13,7 +26,9 @@ export default function deckSection(onOpenDeck) {
     const button = handleButtonOpen.button;
     deckList.push(handleButtonOpen);
     deckSection.appendChild(button);
-    button.scrollIntoView();
+    if (window.innerHeight > window.innerWidth)
+      deckSection.scrollLeft = deckSection.scrollWidth;
+    else deckSection.scrollTop = deckSection.scrollHeight;
   }
 
   function openDeck(deckName) {

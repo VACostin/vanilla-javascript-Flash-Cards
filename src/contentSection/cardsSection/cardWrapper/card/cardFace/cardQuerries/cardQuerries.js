@@ -1,7 +1,7 @@
 const DEFAULT_VALUES = {
   description: "Description",
-  textColor: "rgb(255, 255, 255)",
-  backgroundColor: "rgb(0, 0, 0)",
+  textColor: "rgb(0, 0, 0)",
+  backgroundColor: "rgb(255, 255, 255)",
   //title: "Card Title"
 };
 

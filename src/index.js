@@ -5,8 +5,9 @@ import "./style.css";
 import "./reset.css";
 
 function initUI() {
-  localStorage.clear();
   let editableFlag = true;
+  const styles = document.head.querySelectorAll("style");
+  styles.forEach((style) => style.classList.add("styleMain"));
   const header = headerSection();
   const content = contentSection(contentCallBacks());
   const footer = footerSection(footerCallbacks());

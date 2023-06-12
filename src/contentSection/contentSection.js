@@ -24,12 +24,14 @@ export default function contentSection(onChangeDeckName) {
 
   function enableAll() {
     content.style.pointerEvents = "auto";
-    content.style.backgroundColor = "white";
+    content.style.visibility = "visible";
+    cardsSectionHandle.show();
   }
 
   function disableAll() {
     content.style.pointerEvents = "none";
-    content.style.backgroundColor = "black";
+    content.style.visibility = "hidden";
+    cardsSectionHandle.hide();
   }
 
   return {

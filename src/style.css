@@ -1,199 +1,520 @@
-* {
-  scroll-behavior: smooth;
-}
+@media only screen {
+  * {
+    scroll-behavior: smooth;
+    font-family: Calibri, "Gill Sans", "Gill Sans MT", "Trebuchet MS",
+      sans-serif;
+    color: black;
+    touch-action: manipulation;
+  }
 
-*:not(#content *) {
-  overflow: hidden;
-}
+  *:not(#content *) {
+    overflow: hidden;
+  }
 
-html {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+  html {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: -webkit-fill-available;
+  }
 
-body {
-  margin: 0 auto;
-  flex-basis: 60vh;
-  height: 100vh;
-}
+  body {
+    display: flex;
+    flex-basis: 80vh;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    margin: 0 auto;
+  }
 
-#header {
-  width: 100%;
-  height: 20%;
-  display: flex;
-  border-bottom: 2px solid black;
-}
+  #header {
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 26%;
+    width: 100%;
+  }
 
-#addDeck,
-#selectDecks {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  vertical-align: center;
-  width: 23%;
-}
+  #content {
+    height: 61%;
+    border-width: 0 1px 0 1px;
+    border-style: solid;
+  }
 
-#addDeck {
-  padding-right: 2%;
-  padding-left: 2%;
-  border-right: 2px solid black;
-}
+  #footer {
+    align-items: center;
+    border-top: 1px solid black;
+    display: flex;
+    height: 13%;
+    gap: 6.25%;
+    justify-content: space-around;
+  }
 
-#selectDecks {
-  padding-right: 2%;
-  padding-left: 2%;
-  border-left: 2px solid black;
-}
+  /* header */
 
-#header button {
-  margin-top: auto;
-  margin-bottom: auto;
-  height: 80%;
-  font-size: 0.7em;
-}
+  #decksSettings {
+    border-bottom: 1px solid black;
+    display: flex;
+    gap: 6.25%;
+    height: 54%;
+    justify-content: space-around;
+  }
 
-#deckSection {
-  width: 54%;
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  display: flex;
-  align-items: center;
-  gap: 7%;
-}
+  #deckSection {
+    align-items: center;
+    display: flex;
+    height: 46%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+  }
 
-#deckSection::-webkit-scrollbar {
-  /* WebKit */
-  width: 0;
-  height: 0;
-}
+  #deckSection::-webkit-scrollbar {
+    /* WebKit */
+    height: 0;
+    width: 0;
+  }
 
-.deck {
-  background-size: 100% 100%;
-  flex-shrink: 0;
-  width: 50%;
-  height: 80%;
-}
+  /* header > decksSettings */
 
-#content {
-  height: 70%;
-}
+  .setting {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 25%;
+  }
 
-#fieldEditDeckName {
-  height: 20%;
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .settingsButton {
+    background-color: white;
+    border-radius: 8px;
+    border: 2px solid black;
+    text-decoration: none;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
 
-#fieldEditDeckName > p {
-  text-align: center;
-  text-decoration: underline;
-}
+  .settingsButton span {
+    font-weight: bold;
+    text-align: center;
+    width: 70%;
+  }
 
-#buttonDoneEditDeckName {
-  width: 10%;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
+  .settingsIcon {
+    border-left: 2px solid black;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 35%;
+    height: 100%;
+  }
 
-#buttonCancelEditDeckName {
-  width: 10%;
-  bottom: 0;
-  right: 30%;
-  position: absolute;
-}
+  #iconTheme {
+    content: url("./svg/paint-palette-svgrepo-com.svg");
+  }
 
-#fieldCards {
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  display: flex;
-  height: 80%;
-}
+  #iconAddDeck {
+    content: url("./svg/card-stack-plus-svgrepo-com.svg");
+  }
 
-#fieldCards::-webkit-scrollbar {
-  /* WebKit */
-  width: 0;
-  height: 0;
-}
+  #iconRemoveDecks {
+    content: url("./svg/trash-icon.svg");
+  }
 
-.cardWrap {
-  scroll-snap-align: start;
-  min-width: 100%;
-  height: 100%;
-  perspective: 1000px;
-}
+  #iconFinishRemoveDecks {
+    content: url("./svg/trash-open-lid-icon.svg");
+  }
 
-.cardWrapInner {
-  position: relative;
-  margin: auto;
-  width: 80%;
-  height: 80%;
-  transition: transform 0.4s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+  /* header > deckSection */
 
-.card {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
+  .deckButton {
+    background-color: white;
+    background-size: 100% 100%;
+    border: 2px solid black;
+    border-radius: 8px;
+    flex-shrink: 0;
+    height: 70%;
+    width: 25%;
+    margin-left: 6.25%;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
 
-.cardBack {
-  transform: rotateY(180deg);
-}
+  .deckButton > span {
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-align: center;
+    width: 70%;
+  }
 
-.card {
-  display: flex;
-  justify-content: center;
-}
+  .deckButton > img {
+    border-left: 2px solid black;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 35%;
+    height: 100%;
+    content: url("./svg/deck.svg");
+  }
 
-.fieldEditCardText {
-  white-space: initial;
-  margin-top: auto;
-  margin-bottom: auto;
-}
+  .deckButton:last-child {
+    margin-right: 6.25%;
+  }
 
-.buttonEditCard {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+  /* content */
 
-.buttonRemoveCard {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+  #fieldEditDeckName {
+    align-items: center;
+    display: flex;
+    height: 20%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 70%;
+  }
 
-.buttonEditCard {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+  #fieldEditDeckName > p {
+    font-size: 150%;
+    font-weight: bold;
+    padding: 0 2% 0 2%;
+    text-align: center;
+    border-width: 1px;
+  }
 
-.buttonRemoveCard {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+  #fieldCards {
+    display: flex;
+    height: 80%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+  }
 
-#footer {
-  height: 10%;
-  border-top: 2px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  #fieldCards::-webkit-scrollbar {
+    /* WebKit */
+    height: 0;
+    width: 0;
+  }
+
+  #leftArrow,
+  #rightArrow {
+    background-color: transparent;
+    top: 49%;
+    position: absolute;
+    display: none;
+    visibility: hidden;
+    z-index: 1;
+  }
+
+  #leftArrow {
+    border-color: transparent black transparent transparent;
+    border-width: 2rem 2rem 2rem 0;
+    left: 31%;
+  }
+
+  #rightArrow {
+    border-color: transparent transparent transparent black;
+    border-width: 2rem 0 2rem 2rem;
+    right: 18%;
+  }
+
+  .cardWrap {
+    display: relative;
+    height: 100%;
+    min-width: 100%;
+    perspective: 1000px;
+    scroll-snap-align: start;
+  }
+
+  .cardWrapInner {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 80%;
+    margin: auto;
+    position: relative;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+    width: 80%;
+  }
+
+  .card {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .colorCircle {
+    width: 7%;
+    height: 7%;
+    margin-bottom: 2%;
+    border-radius: 50%;
+    position: absolute;
+    display: none;
+    left: 0px;
+    bottom: 0px;
+    animation-duration: 0.5s;
+  }
+
+  @keyframes colorMoveRed {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 13%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes colorMoveOrange {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 26%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes colorMoveYellow {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 39%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes colorMoveGreen {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 52%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes colorMoveLightBlue {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 65%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes colorMoveIndigo {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 78%;
+      bottom: 0px;
+    }
+  }
+
+  @keyframes colorMoveViolet {
+    0% {
+      left: 0px;
+      bottom: 0px;
+    }
+    100% {
+      left: 91%;
+      bottom: 0px;
+    }
+  }
+
+  .cardBack {
+    transform: rotateY(180deg);
+  }
+
+  .fieldEditCardText {
+    max-width: 100%;
+    margin-bottom: auto;
+    margin-top: auto;
+    white-space: initial;
+  }
+
+  .fieldEditCardText > p {
+    max-width: 100%;
+    text-align: center;
+    word-wrap: break-word;
+  }
+
+  .buttonEditCard,
+  .buttonRemoveCard,
+  .buttonColorCard {
+    background-repeat: no-repeat;
+    background-color: inherit;
+    position: absolute;
+    border: none;
+    width: 9%;
+    height: 11%;
+    background-size: 100% 100%;
+  }
+
+  .buttonEditCard {
+    top: 0;
+    background-image: url("svg/edit-button-svgrepo-com.svg");
+    left: 0;
+  }
+
+  .buttonRemoveCard {
+    top: 0;
+    background-image: url("svg/x-symbol-svgrepo-com.svg");
+    right: 0;
+  }
+
+  .buttonColorCard {
+    bottom: 0;
+    left: 0;
+    background-image: url("svg/paint-palette-svgrepo-com.svg");
+  }
+
+  /* footer */
+
+  .footerButton {
+    background-color: white;
+    width: 25%;
+    height: 50%;
+    border-radius: 8px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  .footerButton span {
+    font-weight: bold;
+    text-align: center;
+    width: 70%;
+  }
+
+  .footerIcon {
+    border-left: 2px solid black;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 35%;
+    height: 100%;
+  }
+
+  #iconImport {
+    content: url("svg/import-svgrepo-com.svg");
+  }
+
+  #iconAddCard {
+    content: url("svg/addCard.svg");
+  }
+
+  #iconExport {
+    content: url("svg/export-button-svgrepo-com.svg");
+  }
+
+  @media screen and (orientation: landscape) {
+    body {
+      flex-basis: 100vw;
+      flex-direction: row;
+    }
+
+    #header {
+      border-left: 1px solid black;
+      border-bottom: none;
+      border-right: 1px solid black;
+      flex-direction: row;
+      height: 100%;
+      width: 31%;
+    }
+
+    #content {
+      height: 100%;
+      width: 51%;
+      border-width: 1px 0px 1px 0px;
+    }
+
+    #footer {
+      flex-direction: column;
+      border-top: none;
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      height: 100%;
+      width: 18%;
+    }
+
+    /* header */
+
+    #decksSettings {
+      border-bottom: none;
+      border-right: 1px solid black;
+      flex-direction: column;
+      align-items: center;
+      width: 54%;
+      height: 100%;
+    }
+
+    #deckSection {
+      height: 100%;
+      flex-direction: column;
+      overflow-x: none;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      width: 46%;
+    }
+
+    /* header > decksSettings */
+
+    .setting {
+      justify-content: center;
+      height: 30%;
+      width: 80%;
+    }
+
+    /* header > deckSection */
+
+    .deckButton {
+      height: 18%;
+      width: 80%;
+      margin-left: 0%;
+      margin-top: 18%;
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    .deckButton > span {
+      width: 70%;
+    }
+
+    .deckButton:last-child {
+      margin-right: 0%;
+      margin-bottom: 18%;
+    }
+
+    /* footer */
+
+    .footerButton {
+      width: 75%;
+      height: 15%;
+    }
+    @media only screen and (min-width: 64.063em) {
+      #leftArrow,
+      #rightArrow {
+        display: inline-block;
+      }
+    } /* min-width 1025px, large screens */
+  }
+} /* Define mobile styles - Mobile First */

@@ -4,8 +4,18 @@ import cardBack from "./card/cardBack.js";
 export default function cardWrapper(cardObject, getDeckName) {
   const cardWrap = document.createElement("div");
   const cardWrapInner = document.createElement("div");
-  const cardFrontHandle = cardFront(cardObject, getDeckName, setCardName);
-  const cardBackHandle = cardBack(cardObject, getDeckName, getCardName);
+  const cardFrontHandle = cardFront(
+    cardObject,
+    getDeckName,
+    setCardName,
+    updateCardColor
+  );
+  const cardBackHandle = cardBack(
+    cardObject,
+    getDeckName,
+    getCardName,
+    updateCardColor
+  );
   let cardName = cardObject.title;
   let facingFront = true;
   init();
@@ -19,6 +29,7 @@ export default function cardWrapper(cardObject, getDeckName) {
     cardWrapInner.appendChild(cardBack);
     cardWrap.appendChild(cardWrapInner);
     cardWrap.addEventListener("click", flipCard);
+    cardWrapInner.style.backgroundColor = cardObject.backgroundColor;
   }
 
   function setCardName(newCardName) {
@@ -27,6 +38,10 @@ export default function cardWrapper(cardObject, getDeckName) {
 
   function getCardName() {
     return cardName;
+  }
+
+  function updateCardColor(color) {
+    cardWrapInner.style.backgroundColor = color;
   }
 
   //0: notFlippable 1: Flippable 2: Flippable after clicking again

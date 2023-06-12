@@ -1,14 +1,15 @@
 import addDeckSection from "./addDeckSection/addDeckSection";
 import deckSection from "./deckSection/decksSection";
-import selectDecksSection from "./selectDecksSection/selectDecksSection";
+import removeDecksSection from "./removeDecksSection/removeDecksSection";
+import deckThemeSection from "./deckThemeSection/deckThemeSection";
 
 export default function headerSection() {
-  localStorage.clear();
   const header = document.querySelector("#header");
   const bigFunctionStack = new Object();
   const handleDeckSection = deckSection(openDeck);
+  const handleDeckThemeSection = deckThemeSection();
   const handleAddDeckSection = addDeckSection(addDeck);
-  const handleSelectDecksSection = selectDecksSection(selectDecks, removeDecks);
+  const handleRemoveDecksSection = removeDecksSection(selectDecks, removeDecks);
 
   function setCallBacks(functionStack) {
     bigFunctionStack.loadFlashCards = functionStack.loadFlashCards;
@@ -19,10 +20,6 @@ export default function headerSection() {
 
   function addDeck() {
     handleDeckSection.addDeck();
-  }
-
-  function toggleAllExcept(section) {
-    bigFunctionStack.toggleAllExcept(section);
   }
 
   function changeDeckName(deckNameOld, deckName) {
@@ -51,28 +48,30 @@ export default function headerSection() {
 
   function enableAll() {
     header.style.pointerEvents = "auto";
-    header.style.backgroundColor = "white";
   }
 
   function disableAll() {
     header.style.pointerEvents = "none";
-    header.style.backgroundColor = "black";
   }
 
   function selectDecks() {
     const toggleAllExcept = bigFunctionStack.toggleAllExcept;
+    const disableButtonTheme = handleDeckThemeSection.disable;
     const disableButtonAdd = handleAddDeckSection.disable;
     const setDeleteMode = handleDeckSection.setDeleteMode;
     toggleAllExcept("header");
+    disableButtonTheme();
     disableButtonAdd();
     setDeleteMode();
   }
 
   function removeDecks() {
     const toggleAllExcept = bigFunctionStack.toggleAllExcept;
+    const enableButtonTheme = handleDeckThemeSection.enable;
     const enableButtonAdd = handleAddDeckSection.enable;
     const onRemoveDecks = handleDeckSection.removeDecks;
     toggleAllExcept("header");
+    enableButtonTheme();
     enableButtonAdd();
     onRemoveDecks();
     resetDeckView();

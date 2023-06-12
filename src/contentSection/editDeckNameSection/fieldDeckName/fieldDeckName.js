@@ -7,7 +7,12 @@ export default function fieldDeckName(onEditDeckName, onDoneEditDeckName) {
   function init() {
     field.setAttribute("id", "fieldDeckName");
     field.addEventListener("click", () => onEditDeckName());
-    field.addEventListener("blur", () => onDoneEditDeckName());
+    ["blur", "focusout"].forEach((event) =>
+      field.addEventListener(event, () => onDoneEditDeckName())
+    );
+    field.addEventListener("keyup", (event) => {
+      if (event.key === "Enter") onDoneEditDeckName();
+    });
   }
 
   function getInput() {

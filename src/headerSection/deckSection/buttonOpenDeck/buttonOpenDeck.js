@@ -4,12 +4,16 @@ export default function buttonOpenDeck(name, onOpenDeck) {
   let deckName = name;
   let deleteFlag = false;
   const button = document.createElement("button");
+  const span = document.createElement("span");
+  const img = document.createElement("img");
   init();
 
   function init() {
-    button.classList.add("deck");
+    button.classList.add("deckButton");
     button.setAttribute("id", "buttonDeck_" + deckName);
-    button.textContent = deckName;
+    span.textContent = deckName;
+    button.appendChild(span);
+    button.appendChild(img);
     setNormalMode();
   }
 
@@ -19,7 +23,7 @@ export default function buttonOpenDeck(name, onOpenDeck) {
 
   function setDeckName(name) {
     deckName = name;
-    button.textContent = deckName;
+    span.textContent = deckName;
   }
 
   function setNormalMode() {

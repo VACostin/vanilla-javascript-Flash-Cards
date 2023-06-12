@@ -1,0 +1,34 @@
+:root {
+  --button-color: #16a085;
+  --button-color-hover: #069075;
+}
+
+#header,
+#footer,
+html {
+  background-color: #1abc9c;
+}
+
+#content {
+  background-color: #ffffff;
+}
+
+.settingsButton,
+.deckButton,
+.footerButton {
+  background-color: var(--button-color);
+}
+
+#leftArrow {
+  border-color: transparent var(--button-color) transparent transparent;
+}
+
+#rightArrow {
+  border-color: transparent transparent transparent var(--button-color);
+}
+
+.settingsButton:hover,
+.deckButton:hover,
+.footerButton:hover {
+  background-color: var(--button-color-hover);
+}

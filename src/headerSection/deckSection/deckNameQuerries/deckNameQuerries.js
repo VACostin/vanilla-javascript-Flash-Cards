@@ -1,4 +1,5 @@
 const DEFAULT_NAME = "New Deck";
+const RESERVED_NAME = "_deckThemes";
 
 export default function deckNameQuerries() {
   function insertNewDeckObject() {
@@ -19,7 +20,9 @@ export default function deckNameQuerries() {
 
   function getAllDeckNames() {
     const nameList = [];
-    Object.keys(localStorage).forEach((key) => nameList.push(key));
+    Object.keys(localStorage).forEach((key) => {
+      if (key != RESERVED_NAME) nameList.push(key);
+    });
     return nameList;
   }
 
@@ -33,6 +36,7 @@ export default function deckNameQuerries() {
 
   function generateName(deckName) {
     const nameList = getAllDeckNames();
+    nameList.push(RESERVED_NAME);
     const defaultName = deckName;
     for (let i = 1; nameList.includes(deckName); i++) {
       deckName = defaultName + i;

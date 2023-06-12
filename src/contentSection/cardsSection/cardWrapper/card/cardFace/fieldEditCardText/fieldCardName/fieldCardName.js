@@ -5,6 +5,9 @@ export default function fieldCardName(name, onFinishEditCard) {
   ["focusout", "touchmove"].forEach((event) => {
     field.addEventListener(event, () => onFinishEditCard());
   });
+  field.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") field.blur();
+  });
 
   return field;
 }
