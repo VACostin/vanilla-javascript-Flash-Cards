@@ -1,1 +1,1 @@
-[Website link.](https://vacostin.github.io/Flash-Cards/)
+[Website link.](https://vacostin.github.io/vanilla-javascript-Flash-Cards/)
